@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SportsNoteAPI/SportsNoteAPI.iml" filepath="$PROJECT_DIR$/SportsNoteAPI/SportsNoteAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SportsNoteAPP/SportsNoteAPP.iml" filepath="$PROJECT_DIR$/SportsNoteAPP/SportsNoteAPP.iml" />
     </modules>
   </component>
 </project>
