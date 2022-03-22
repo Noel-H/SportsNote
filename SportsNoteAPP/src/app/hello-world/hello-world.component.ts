@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HelloWorldService} from "../service/hello-world.service";
-import {HelloWorld} from "../interface/hello-world";
+import {HelloWorldDTO} from "../interface/hello-world-d-t-o";
 
 @Component({
   selector: 'app-hello-world',
@@ -17,6 +17,6 @@ export class HelloWorldComponent implements OnInit{
   ngOnInit(): void {
     this.helloWorldService.getHelloWorld()
       .subscribe(
-      (data: HelloWorld) => this.helloWorld = data.helloWorld);
+      (data: HelloWorldDTO) => this.helloWorld = data.helloWorld);
   }
 }
