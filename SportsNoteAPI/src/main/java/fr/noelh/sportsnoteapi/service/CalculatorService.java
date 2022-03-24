@@ -8,30 +8,6 @@ import java.util.List;
 @Service
 public class CalculatorService {
 
-    private int findDivider(List<Double> weeklyWeightList){
-        int savedWeight = 0;
-        for (Double weight : weeklyWeightList) {
-            if(weight!=null){
-                savedWeight++;
-            }
-        }
-        return savedWeight;
-    }
-
-    public double calculateAverage(List<Double> weeklyWeightList){
-        int divider = findDivider(weeklyWeightList);
-        double dividend = calculateDividend(weeklyWeightList);
-        return dividend/divider;
-    }
-
-    private double calculateDividend(List<Double> weeklyWeightList) {
-        double dividend = 0;
-        for (Double weight : weeklyWeightList){
-            dividend = dividend+weight;
-        }
-        return dividend;
-    }
-
     public double calculateAverageStream(List<Double> weeklyWeightList){
         return weeklyWeightList.stream()
                 .mapToDouble((weight) -> weight)
