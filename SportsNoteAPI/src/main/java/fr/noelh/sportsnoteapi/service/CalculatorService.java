@@ -50,7 +50,7 @@ public class CalculatorService {
             } else {
                 weeklyWeightList = weightList.subList(lastValue,firstValue);
             }
-            averageWeightList.add(calculateAverageStream(weeklyWeightList));
+            averageWeightList.add(Math.round(calculateAverageStream(weeklyWeightList)*10)/10.0);
             lastValue++;
             firstValue++;
         }
