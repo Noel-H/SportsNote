@@ -76,4 +76,57 @@ public class WeightRecordService {
 
         return averageWeightRecordList;
     }
+
+
+    public List<AverageWeightRecordDTO> getAverageWeightRecordListAlt2() {
+        List<AverageWeightRecordDTO> averageWeightRecordList;
+        //recup la liste de poids
+        List<WeightRecord> weightRecordList = getWeightRecordList();
+        //Faire la moyenne des poids
+        averageWeightRecordList = calculateAverageWeight(weightRecordList);
+        return averageWeightRecordList;
+    }
+
+    private List<AverageWeightRecordDTO> calculateAverageWeight(List<WeightRecord> weightRecordList) {
+        List<AverageWeightRecordDTO> calculatedAverageWeight = new ArrayList<>();
+        // pour tous les element
+        for (WeightRecord weightRecord : weightRecordList) {
+            AverageWeightRecordDTO averageWeightRecordDTO = new AverageWeightRecordDTO();
+            // on recup les 7 dernier jours de data a partir de la date donné
+            List<WeightRecord> lastWeekofWeightRecord = get7LastDaysOfWeightRecord(weightRecord.getDate(), weightRecordList);
+            // on faite la moyenne des poids présent
+            double average = getAverage(lastWeekofWeightRecord);
+            // save la date du dernier jour
+            averageWeightRecordDTO.setDate(weightRecord.getDate());
+            // on arrondi le poids a 1 chiffre apres la virgule
+            average = roundNumberTo1(average);
+            // save la moyenne
+            averageWeightRecordDTO.setWeight(average);
+            //
+            calculatedAverageWeight.add(averageWeightRecordDTO);
+        }
+        return calculatedAverageWeight;
+    }
+
+    private double roundNumberTo1(double number) {
+        return Math.round(number*10)/10.0;
+    }
+
+    private double getAverage(List<WeightRecord> lastWeekofWeightRecord) {
+        //calculer la moyenne
+        double result = 0;
+        for (WeightRecord weightRecord : lastWeekofWeightRecord) {
+            result = result+weightRecord.getWeight();
+        }
+        return result/lastWeekofWeightRecord.size();
+    }
+
+    private List<WeightRecord> get7LastDaysOfWeightRecord(LocalDate date, List<WeightRecord> weightRecordList) {
+        return weightRecordList.stream()
+                .filter(weightRecord ->
+                        weightRecord.getDate().isBefore(date.plusDays(1)) &&
+                                weightRecord.getDate().isAfter(date.minusDays(7))                        )
+                .collect(Collectors.toList());
+    }
+
 }

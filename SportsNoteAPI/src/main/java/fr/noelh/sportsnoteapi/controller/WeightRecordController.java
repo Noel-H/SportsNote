@@ -24,6 +24,6 @@ public class WeightRecordController {
 
     @GetMapping("/average_weight_record_list")
     public List<AverageWeightRecordDTO> getAverageWeightRecordList(){
-        return weightRecordService.getAverageWeightRecordListAlt(weightRecordService.getWeightRecordList());
+        return weightRecordService.getAverageWeightRecordListAlt2();
     }
 }
