@@ -3,7 +3,7 @@ package fr.noelh.sportsnoteapi.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -13,8 +13,9 @@ public class WeightRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private LocalDateTime date;
+    @Column(nullable = false,
+    unique = true)
+    private LocalDate date;
 
     private Double weight;
 }
