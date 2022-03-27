@@ -154,4 +154,14 @@ public class WeightRecordService {
         weightRecord.setWeight(weightRecordDTO.getWeight());
         return weightRecordRepository.save(weightRecord);
     }
+
+    public WeightRecord deleteWeightRecord(String date) throws WeightRecordNotFoundException {
+        LocalDate localDate = LocalDate.parse(date);
+        if (!weightRecordRepository.existsByDate(localDate)){
+            throw new WeightRecordNotFoundException("No weight record found to delete for the : "+localDate);
+        }
+        WeightRecord weightRecord = weightRecordRepository.getByDate(localDate);
+        weightRecordRepository.delete(weightRecord);
+        return weightRecord;
+    }
 }

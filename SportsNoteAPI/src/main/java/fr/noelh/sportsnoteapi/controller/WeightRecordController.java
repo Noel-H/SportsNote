@@ -56,6 +56,17 @@ public class WeightRecordController {
         }
     }
 
+    @DeleteMapping("/{date}")
+    public ResponseEntity<WeightRecord> deleteWeightRecord(@PathVariable("date") String date){
+        try {
+            return ResponseEntity.ok(weightRecordService.deleteWeightRecord(date));
+        } catch (WeightRecordNotFoundException e){
+            return ResponseEntity.unprocessableEntity().build();
+        } catch (DateTimeParseException e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @GetMapping("/average")
     public List<AverageWeightRecordDTO> getAverageWeightRecordList(){
         return weightRecordService.getAverageWeightRecordListAlt2();
