@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface WeightRecordRepository extends JpaRepository<WeightRecord, Long> {
     Optional<WeightRecord> findByDate(LocalDate localDate);
+    WeightRecord getByDate(LocalDate localDate);
     boolean existsByDate(LocalDate localDate);
 }

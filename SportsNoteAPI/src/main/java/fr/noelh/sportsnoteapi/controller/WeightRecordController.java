@@ -1,5 +1,7 @@
 package fr.noelh.sportsnoteapi.controller;
 
+import fr.noelh.sportsnoteapi.customexception.WeightRecordAlreadyExistException;
+import fr.noelh.sportsnoteapi.customexception.WeightRecordNotFoundException;
 import fr.noelh.sportsnoteapi.dto.AverageWeightRecordDTO;
 import fr.noelh.sportsnoteapi.dto.WeightRecordDTO;
 import fr.noelh.sportsnoteapi.model.WeightRecord;
@@ -29,20 +31,28 @@ public class WeightRecordController {
     public ResponseEntity<WeightRecord> getWeightRecordByDate(@PathVariable("date") String date){
         try {
             return ResponseEntity.ok(weightRecordService.getWeightRecordByDate(date));
-        } catch (NoSuchElementException e){
+        } catch (WeightRecordNotFoundException e){
             return ResponseEntity.notFound().build();
         } catch (DateTimeParseException e){
             return ResponseEntity.badRequest().build();
         }
     }
 
-    //TODO change error type
     @PostMapping("")
     public ResponseEntity<WeightRecord> addWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
         try {
             return ResponseEntity.ok(weightRecordService.addWeightRecord(weightRecordDTO));
-        } catch (IllegalArgumentException e){
-            return ResponseEntity.noContent().build();
+        } catch (WeightRecordAlreadyExistException e){
+            return ResponseEntity.unprocessableEntity().build();
+        }
+    }
+
+    @PutMapping("")
+    public ResponseEntity<WeightRecord> updateWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
+        try {
+            return ResponseEntity.ok(weightRecordService.updateWeightRecord(weightRecordDTO));
+        } catch (WeightRecordNotFoundException e){
+            return ResponseEntity.unprocessableEntity().build();
         }
     }
 

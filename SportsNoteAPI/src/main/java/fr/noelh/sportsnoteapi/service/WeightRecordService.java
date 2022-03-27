@@ -1,5 +1,7 @@
 package fr.noelh.sportsnoteapi.service;
 
+import fr.noelh.sportsnoteapi.customexception.WeightRecordAlreadyExistException;
+import fr.noelh.sportsnoteapi.customexception.WeightRecordNotFoundException;
 import fr.noelh.sportsnoteapi.dto.AverageWeightRecordDTO;
 import fr.noelh.sportsnoteapi.dto.WeightRecordDTO;
 import fr.noelh.sportsnoteapi.model.WeightRecord;
@@ -128,18 +130,27 @@ public class WeightRecordService {
                 .collect(Collectors.toList());
     }
 
-    public WeightRecord getWeightRecordByDate(String date) {
+    public WeightRecord getWeightRecordByDate(String date) throws WeightRecordNotFoundException {
         LocalDate localDate = LocalDate.parse(date);
         return weightRecordRepository.findByDate(localDate)
-                .orElseThrow(() -> new NoSuchElementException("No weight record found for the : "+date));
+                .orElseThrow(() -> new WeightRecordNotFoundException("No weight record found for the : "+date));
     }
 
-    public WeightRecord addWeightRecord(WeightRecordDTO weightRecordDTO) {
+    public WeightRecord addWeightRecord(WeightRecordDTO weightRecordDTO) throws WeightRecordAlreadyExistException {
         if (weightRecordRepository.existsByDate(weightRecordDTO.getDate())){
-            throw new IllegalArgumentException("Weight record already exist");
+            throw new WeightRecordAlreadyExistException("Weight record already exist for the : "+weightRecordDTO.getDate());
         }
         WeightRecord weightRecord = new WeightRecord();
         weightRecord.setDate(weightRecordDTO.getDate());
+        weightRecord.setWeight(weightRecordDTO.getWeight());
+        return weightRecordRepository.save(weightRecord);
+    }
+
+    public WeightRecord updateWeightRecord(WeightRecordDTO weightRecordDTO) throws WeightRecordNotFoundException {
+        if (!weightRecordRepository.existsByDate(weightRecordDTO.getDate())){
+            throw new WeightRecordNotFoundException("No weight record found to update for the : "+weightRecordDTO.getDate());
+        }
+        WeightRecord weightRecord = weightRecordRepository.getByDate(weightRecordDTO.getDate());
         weightRecord.setWeight(weightRecordDTO.getWeight());
         return weightRecordRepository.save(weightRecord);
     }
