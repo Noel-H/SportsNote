@@ -47,7 +47,7 @@ public class WeightRecordController {
         try {
             return ResponseEntity.ok(weightRecordService.addWeightRecord(weightRecordDTO));
         } catch (WeightRecordAlreadyExistException e){
-            log.error("POST /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getDate(), e.getMessage());
+            log.error("POST /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
         }
     }
@@ -58,7 +58,7 @@ public class WeightRecordController {
         try {
             return ResponseEntity.ok(weightRecordService.updateWeightRecord(weightRecordDTO));
         } catch (WeightRecordNotFoundException e){
-            log.error("PUT /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getDate(), e.getMessage());
+            log.error("PUT /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
         }
     }
