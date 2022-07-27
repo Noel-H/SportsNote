@@ -5,6 +5,7 @@ import fr.noelh.sportsnoteapi.model.WeightRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,13 @@ public class AverageWeightRecordService {
         List<WeightRecord> weightRecordList = weightRecordService.getWeightRecordList();
         averageWeightRecordList = calculateAverageWeight(weightRecordList);
         return averageWeightRecordList;
+    }
+
+    public List<AverageWeightRecordDTO> getWeeklyAverageWeightRecordListByDay(DayOfWeek dayOfWeek) {
+        return getAverageWeightRecordList().stream()
+                .filter(averageWeightRecordDTO -> averageWeightRecordDTO.getDate().getDayOfWeek() == dayOfWeek)
+                .sorted((o1, o2) -> o1.getDate().isAfter(o2.getDate())? -1 : 1)
+                .collect(Collectors.toList());
     }
 
     private List<AverageWeightRecordDTO> calculateAverageWeight(List<WeightRecord> weightRecordList) {
