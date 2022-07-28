@@ -27,7 +27,6 @@ public class AverageWeightRecordService {
     public List<AverageWeightRecordDTO> getWeeklyAverageWeightRecordListByDay(DayOfWeek dayOfWeek) {
         return getAverageWeightRecordList().stream()
                 .filter(averageWeightRecordDTO -> averageWeightRecordDTO.getDate().getDayOfWeek() == dayOfWeek)
-                .sorted((o1, o2) -> o1.getDate().isAfter(o2.getDate())? -1 : 1)
                 .collect(Collectors.toList());
     }
 
