@@ -1,0 +1,16 @@
+<p>Selection de periode pour le graphique</p>
+<p>Image de Graphique</p>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Date</th>
+    <th scope="col">Poids</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let weightRecord of weightRecordList">
+    <th scope="row">{{weightRecord.date | date : 'fullDate'}}</th>
+    <td>{{weightRecord.weight}}</td>
+  </tr>
+  </tbody>
+</table>
