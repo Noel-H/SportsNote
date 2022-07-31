@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { WeightComponent } from './weight/weight.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AverageWeightComponent } from './average-weight/average-weight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HelloWorldComponent,
     WeightComponent,
-    NavBarComponent
+    NavBarComponent,
+    AverageWeightComponent
   ],
   imports: [
     BrowserModule,
