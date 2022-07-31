@@ -5,7 +5,7 @@ import {HelloWorldDTO} from "../interface/hello-world-d-t-o";
 @Component({
   selector: 'app-hello-world',
   templateUrl: './hello-world.component.html',
-  styleUrls: ['./hello-world.component.css']
+  styleUrls: ['./hello-world.component.scss']
 })
 export class HelloWorldComponent implements OnInit{
 
