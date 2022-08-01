@@ -13,6 +13,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from "@angular/material/table";
 import { WeightChartComponent } from './weight-chart/weight-chart.component';
+import { WeightTableComponent } from './weight-table/weight-table.component';
+import { WeightNavBarComponent } from './weight-nav-bar/weight-nav-bar.component';
 
 
 
@@ -23,7 +25,9 @@ import { WeightChartComponent } from './weight-chart/weight-chart.component';
     WeightComponent,
     NavBarComponent,
     AverageWeightComponent,
-    WeightChartComponent
+    WeightChartComponent,
+    WeightTableComponent,
+    WeightNavBarComponent
   ],
   imports: [
     BrowserModule,

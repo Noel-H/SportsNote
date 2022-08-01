@@ -10,7 +10,6 @@ import {WeightRecordListService} from "../service/weight-record-list.service";
 export class WeightComponent implements OnInit {
 
   weightRecordList : WeightRecordDTO[] = [];
-  displayedColumns: string[] = ['date','weight'];
 
   constructor(private weightRecordListService : WeightRecordListService) { }
 

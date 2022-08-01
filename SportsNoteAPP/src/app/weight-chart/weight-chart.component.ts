@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Chart} from "chart.js";
 import { registerables } from 'chart.js';
 import {WeightRecordDTO} from "../interface/weight-record-d-t-o";
-import {WeightComponent} from "../weight/weight.component";
 
 @Component({
   selector: 'app-weight-chart',
@@ -10,7 +9,12 @@ import {WeightComponent} from "../weight/weight.component";
   styleUrls: ['./weight-chart.component.scss']
 })
 
-export class WeightChartComponent implements OnInit {
+export class WeightChartComponent implements OnInit, OnChanges {
+
+  @Input() weightRecordList : WeightRecordDTO[] = [];
+  dateList : Date[] = [];
+  weightList : number[] = [];
+  chart : any = [];
 
   constructor() { }
 
@@ -19,15 +23,37 @@ export class WeightChartComponent implements OnInit {
     this.createdChart()
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getDateFromWeightRecordList();
+    this.getWeightFromWeightRecordList();
+    this.updateChart()
+  }
+
   createdChart(): void{
-    new Chart('myChart', {
+    this.chart = new Chart('myChart', {
       type : "line",
       data : {
-        labels : ["Paris","Lyon","Tokyo","Toronto"],
+        labels : []
+        ,
         datasets : [{
-          data : [100,200,300,400]
+          label : 'Poids/Date',
+          data : []
         }]
       }
     })
+  }
+
+  private updateChart(){
+    this.chart.data.labels = this.dateList.reverse();
+    this.chart.data.datasets[0].data = this.weightList.reverse();
+    this.chart.update();
+  }
+
+  private getDateFromWeightRecordList() {
+    this.dateList = this.weightRecordList.map(weighRecordDTO => weighRecordDTO.date);
+  }
+
+  private getWeightFromWeightRecordList() {
+    this.weightList = this.weightRecordList.map(weighRecordDTO => weighRecordDTO.weight);
   }
 }

@@ -1,17 +1,6 @@
-<table mat-table [dataSource]="weightRecordList" class="mat-elevation-z8">
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let weightRecord"> {{weightRecord.date | date : 'fullDate'}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let weightRecord"> {{weightRecord.weight}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<app-weight-nav-bar></app-weight-nav-bar>
+<app-weight-chart [weightRecordList]="weightRecordList"></app-weight-chart>
+<app-weight-table [weightRecordList]="weightRecordList"></app-weight-table>
 
 
 
