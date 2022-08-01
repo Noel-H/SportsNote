@@ -26,7 +26,7 @@ export class WeightChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.getDateFromWeightRecordList();
     this.getWeightFromWeightRecordList();
-    this.updateChart()
+    this.updateChart();
   }
 
   createdChart(): void{
@@ -44,8 +44,13 @@ export class WeightChartComponent implements OnInit, OnChanges {
   }
 
   private updateChart(){
+    this.chart.data = {labels: []};
+    this.chart.data = {datasets: []};
+    this.chart.data.datasets[0] = {data : []};
+
     this.chart.data.labels = this.dateList.reverse();
     this.chart.data.datasets[0].data = this.weightList.reverse();
+
     this.chart.update();
   }
 
