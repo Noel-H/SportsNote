@@ -15,12 +15,13 @@ export class WeightChartComponent implements OnInit, OnChanges {
   dateList : Date[] = [];
   weightList : number[] = [];
   chart : any = [];
+  // chart : Chart = new Chart('testChart',{type : "line", data : {labels : [], datasets : []}});
 
   constructor() { }
 
   ngOnInit(): void {
     Chart.register(...registerables);
-    this.createdChart()
+    this.createdChart();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,10 +36,7 @@ export class WeightChartComponent implements OnInit, OnChanges {
       data : {
         labels : []
         ,
-        datasets : [{
-          label : 'Poids/Date',
-          data : []
-        }]
+        datasets : []
       }
     })
   }
@@ -49,6 +47,7 @@ export class WeightChartComponent implements OnInit, OnChanges {
     this.chart.data.datasets[0] = {data : []};
 
     this.chart.data.labels = this.dateList.reverse();
+    this.chart.data.datasets[0].label = 'Weight/Date';
     this.chart.data.datasets[0].data = this.weightList.reverse();
 
     this.chart.update();

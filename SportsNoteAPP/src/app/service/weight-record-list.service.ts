@@ -13,4 +13,8 @@ export class WeightRecordListService {
   getWeightRecordList(): Observable<WeightRecordDTO[]>{
     return this.http.get<WeightRecordDTO[]>('http://localhost:8080/weight_record/list');
   }
+
+  getAverageWeightRecordList(): Observable<WeightRecordDTO[]>{
+    return this.http.get<WeightRecordDTO[]>('http://localhost:8080/average_weight_record/list');
+  }
 }
