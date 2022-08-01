@@ -37,6 +37,10 @@ export class WeightChartComponent implements OnInit, OnChanges {
         labels : []
         ,
         datasets : []
+      },
+      options : {
+        responsive : true,
+        maintainAspectRatio : false
       }
     })
   }
