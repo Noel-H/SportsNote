@@ -10,6 +10,7 @@ import {WeightRecordListService} from "../service/weight-record-list.service";
 export class WeightComponent implements OnInit {
 
   weightRecordList : WeightRecordDTO[] = [];
+  averageWeightRecordList : WeightRecordDTO[] = [];
 
   constructor(private weightRecordListService : WeightRecordListService) { }
 
@@ -17,6 +18,10 @@ export class WeightComponent implements OnInit {
     this.weightRecordListService.getWeightRecordList()
       .subscribe(
         (data :WeightRecordDTO[]) => this.weightRecordList = data.reverse());
+
+    this.weightRecordListService.getAverageWeightRecordList()
+      .subscribe(
+        (data :WeightRecordDTO[]) => this.averageWeightRecordList = data.reverse());
   }
 
 }

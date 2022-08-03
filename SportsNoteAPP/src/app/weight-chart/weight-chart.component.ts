@@ -12,8 +12,10 @@ import {WeightRecordDTO} from "../interface/weight-record-d-t-o";
 export class WeightChartComponent implements OnInit, OnChanges {
 
   @Input() weightRecordList : WeightRecordDTO[] = [];
+  @Input() averageWeightRecordList : WeightRecordDTO[] = [];
   dateList : Date[] = [];
   weightList : number[] = [];
+  averageWeightList : number[] = [];
   chart : any = [];
   // chart : Chart = new Chart('testChart',{type : "line", data : {labels : [], datasets : []}});
 
@@ -27,6 +29,7 @@ export class WeightChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.getDateFromWeightRecordList();
     this.getWeightFromWeightRecordList();
+    this.getAverageWeightFromAverageWeightRecordList()
     this.updateChart();
   }
 
@@ -49,11 +52,16 @@ export class WeightChartComponent implements OnInit, OnChanges {
     this.chart.data = {labels: []};
     this.chart.data = {datasets: []};
     this.chart.data.datasets[0] = {data : []};
+    this.chart.data.datasets[1] = {data : []};
 
     this.chart.data.labels = this.dateList.reverse();
     this.chart.data.datasets[0].label = 'Weight/Date';
     this.chart.data.datasets[0].data = this.weightList.reverse();
+    this.chart.data.datasets[0].borderColor = '#247BC0';
 
+    this.chart.data.datasets[1].label = 'Average Weight/Date';
+    this.chart.data.datasets[1].data = this.averageWeightList.reverse();
+    this.chart.data.datasets[1].borderColor = '#C979E5';
     this.chart.update();
   }
 
@@ -63,5 +71,9 @@ export class WeightChartComponent implements OnInit, OnChanges {
 
   private getWeightFromWeightRecordList() {
     this.weightList = this.weightRecordList.map(weighRecordDTO => weighRecordDTO.weight);
+  }
+
+  private getAverageWeightFromAverageWeightRecordList() {
+    this.averageWeightList = this.averageWeightRecordList.map(weighRecordDTO => weighRecordDTO.weight);
   }
 }

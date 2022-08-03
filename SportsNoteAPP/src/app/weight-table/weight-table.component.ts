@@ -9,6 +9,7 @@ import {WeightRecordDTO} from "../interface/weight-record-d-t-o";
 export class WeightTableComponent implements OnInit {
 
   @Input() weightRecordList : WeightRecordDTO[] = [];
+  @Input() averageWeightRecordList : WeightRecordDTO[] = [];
   displayedColumns: string[] = ['date','weight'];
 
   constructor() { }
