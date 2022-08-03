@@ -1,6 +1,19 @@
 <app-weight-nav-bar></app-weight-nav-bar>
-<app-weight-chart [weightRecordList]="weightRecordList" [averageWeightRecordList]="averageWeightRecordList"></app-weight-chart>
-<app-weight-table [weightRecordList]="weightRecordList" [averageWeightRecordList]="averageWeightRecordList"></app-weight-table>
+
+<!--<p (click)="switchTogglePosition()">Toggle</p>-->
+
+<p>
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="bold" (click)="setToggleOnWeight()">Weight</mat-button-toggle>
+    <mat-button-toggle value="italic" (click)="setToggleOnAverageWeight()">Average Weight</mat-button-toggle>
+  </mat-button-toggle-group>
+</p>
+<app-weight-chart [weightRecordList]="weightRecordList"
+                  [averageWeightRecordList]="averageWeightRecordList"
+                  [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-chart>
+<app-weight-table [weightRecordList]="weightRecordList"
+                  [averageWeightRecordList]="averageWeightRecordList"
+                  [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-table>
 
 
 

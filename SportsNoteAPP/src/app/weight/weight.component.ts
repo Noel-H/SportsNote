@@ -11,6 +11,7 @@ export class WeightComponent implements OnInit {
 
   weightRecordList : WeightRecordDTO[] = [];
   averageWeightRecordList : WeightRecordDTO[] = [];
+  isAverageWeightToggleSelected : boolean = true;
 
   constructor(private weightRecordListService : WeightRecordListService) { }
 
@@ -22,6 +23,14 @@ export class WeightComponent implements OnInit {
     this.weightRecordListService.getAverageWeightRecordList()
       .subscribe(
         (data :WeightRecordDTO[]) => this.averageWeightRecordList = data.reverse());
+  }
+
+  setToggleOnWeight(){
+    this.isAverageWeightToggleSelected = false;
+  }
+
+  setToggleOnAverageWeight(){
+    this.isAverageWeightToggleSelected = true;
   }
 
 }

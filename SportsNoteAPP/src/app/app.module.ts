@@ -15,6 +15,7 @@ import {MatTableModule} from "@angular/material/table";
 import { WeightChartComponent } from './weight-chart/weight-chart.component';
 import { WeightTableComponent } from './weight-table/weight-table.component';
 import { WeightNavBarComponent } from './weight-nav-bar/weight-nav-bar.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 
@@ -36,7 +37,8 @@ import { WeightNavBarComponent } from './weight-nav-bar/weight-nav-bar.component
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
