@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/weight_record")
+@CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 public class WeightRecordController {
 

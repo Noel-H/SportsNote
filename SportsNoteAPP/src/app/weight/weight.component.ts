@@ -11,7 +11,7 @@ export class WeightComponent implements OnInit {
 
   weightRecordList : WeightRecordDTO[] = [];
   averageWeightRecordList : WeightRecordDTO[] = [];
-  isAverageWeightToggleSelected : boolean = true;
+  isAverageWeightToggleSelected : boolean = false;
 
   constructor(private weightRecordListService : WeightRecordListService) { }
 
@@ -31,6 +31,14 @@ export class WeightComponent implements OnInit {
 
   setToggleOnAverageWeight(){
     this.isAverageWeightToggleSelected = true;
+  }
+
+  //test
+  addWeightRecord(){
+    this.weightRecordListService.addWeightRecord(new class implements WeightRecordDTO {
+      date: Date = new Date(2022,8,7);
+      weight: number = 80.5;
+    }).subscribe()
   }
 
 }

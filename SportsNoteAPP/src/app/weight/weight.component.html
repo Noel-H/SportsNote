@@ -8,6 +8,14 @@
     <mat-button-toggle value="italic" (click)="setToggleOnAverageWeight()">Average Weight</mat-button-toggle>
   </mat-button-toggle-group>
 </p>
+
+<!--test-->
+<p>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="addWeightRecord()">
+    <mat-icon>add</mat-icon>
+  </button>
+</p>
+<!---->
 <app-weight-chart [weightRecordList]="weightRecordList"
                   [averageWeightRecordList]="averageWeightRecordList"
                   [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-chart>
