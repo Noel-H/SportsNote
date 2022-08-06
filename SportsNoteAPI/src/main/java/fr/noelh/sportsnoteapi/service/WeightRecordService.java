@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WeightRecordService {
@@ -18,7 +20,11 @@ public class WeightRecordService {
     private WeightRecordRepository weightRecordRepository;
 
     public List<WeightRecord> getWeightRecordList(){
-        return weightRecordRepository.findAll();
+        List<WeightRecord> weightRecordList = new ArrayList<>();
+        weightRecordRepository.findAll().forEach(weightRecord -> weightRecordList.add(weightRecord));
+        return weightRecordList.stream()
+                .sorted((o1, o2) -> o1.getDate().isAfter(o2.getDate()) ? 1 : -1)
+                .collect(Collectors.toList());
     }
 
     public WeightRecord getWeightRecordByDate(String date) throws WeightRecordNotFoundException {

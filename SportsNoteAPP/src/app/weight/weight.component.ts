@@ -35,10 +35,16 @@ export class WeightComponent implements OnInit {
 
   //test
   addWeightRecord(){
-    this.weightRecordListService.addWeightRecord(new class implements WeightRecordDTO {
-      date: Date = new Date(2022,8,7);
-      weight: number = 80.5;
-    }).subscribe()
+    console.log('Data added')
+    // this.weightRecordListService.addWeightRecord(new class implements WeightRecordDTO {
+    //   date: Date = new Date(2022,8,7);
+    //   weight: number = 80.5;
+    // }).subscribe()
+  }
+
+  deleteWeightRecord(){
+    console.log('Data Deleted')
+    this.weightRecordListService.deleteWeightRecord('2022-08-07').subscribe()
   }
 
 }
