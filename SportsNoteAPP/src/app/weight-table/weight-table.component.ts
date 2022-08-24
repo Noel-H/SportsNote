@@ -11,7 +11,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   @Input() weightRecordList: WeightRecordDTO[] = [];
   @Input() averageWeightRecordList: WeightRecordDTO[] = [];
   @Input() isAverageWeightToggleSelected: boolean = false;
-  displayedColumns: string[] = ['date', 'weight'];
+  displayedColumns: string[] = ['date', 'weight', 'options'];
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
 

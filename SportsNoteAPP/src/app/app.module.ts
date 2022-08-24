@@ -16,7 +16,7 @@ import { WeightChartComponent } from './weight-chart/weight-chart.component';
 import { WeightTableComponent } from './weight-table/weight-table.component';
 import { WeightNavBarComponent } from './weight-nav-bar/weight-nav-bar.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import {WeightRecordViewModule} from "./weight-record-view/weight-record-view.module";
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    WeightRecordViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -44,7 +44,7 @@ export class WeightComponent implements OnInit {
 
   deleteWeightRecord(){
     console.log('Data Deleted')
-    this.weightRecordListService.deleteWeightRecord('2022-08-07').subscribe()
+    // this.weightRecordListService.deleteWeightRecord('2022-08-07').subscribe()
   }
 
 }
