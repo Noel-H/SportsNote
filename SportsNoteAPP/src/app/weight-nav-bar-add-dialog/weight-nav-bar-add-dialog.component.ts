@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WeightRecordListService} from "../service/weight-record-list.service";
 
 @Component({
   selector: 'app-weight-nav-bar-add-dialog',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeightNavBarAddDialogComponent implements OnInit {
 
-  constructor() {}
+  date : Date = new Date();
+  weight : number = 70;
+
+  constructor(private weightRecordListService : WeightRecordListService) {}
 
   ngOnInit(): void {
+  }
+
+  addButtonClick(): void {
+    this.weightRecordListService.addWeightRecord({date : this.date, weight : this.weight}).subscribe();
   }
 
 }

@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import { WeightNavBarAddDialogComponent } from './weight-nav-bar-add-dialog/weight-nav-bar-add-dialog.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -53,7 +54,9 @@ import { WeightNavBarAddDialogComponent } from './weight-nav-bar-add-dialog/weig
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    WeightRecordViewModule
+    WeightRecordViewModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
