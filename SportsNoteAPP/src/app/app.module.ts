@@ -16,7 +16,14 @@ import { WeightChartComponent } from './weight-chart/weight-chart.component';
 import { WeightTableComponent } from './weight-table/weight-table.component';
 import { WeightNavBarComponent } from './weight-nav-bar/weight-nav-bar.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from "@angular/material/card";
 import {WeightRecordViewModule} from "./weight-record-view/weight-record-view.module";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatInputModule} from "@angular/material/input";
+import { WeightNavBarAddDialogComponent } from './weight-nav-bar-add-dialog/weight-nav-bar-add-dialog.component';
 
 
 @NgModule({
@@ -28,7 +35,8 @@ import {WeightRecordViewModule} from "./weight-record-view/weight-record-view.mo
     AverageWeightComponent,
     WeightChartComponent,
     WeightTableComponent,
-    WeightNavBarComponent
+    WeightNavBarComponent,
+    WeightNavBarAddDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +47,12 @@ import {WeightRecordViewModule} from "./weight-record-view/weight-record-view.mo
     MatButtonModule,
     MatTableModule,
     MatButtonToggleModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
     WeightRecordViewModule
   ],
   providers: [],

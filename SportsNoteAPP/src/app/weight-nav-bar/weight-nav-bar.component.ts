@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {WeightNavBarAddDialogComponent} from "../weight-nav-bar-add-dialog/weight-nav-bar-add-dialog.component";
 
 @Component({
   selector: 'app-weight-nav-bar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeightNavBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  openDialog(): void {
+    this.dialog.open(WeightNavBarAddDialogComponent, {
+
+    });
   }
 
 }

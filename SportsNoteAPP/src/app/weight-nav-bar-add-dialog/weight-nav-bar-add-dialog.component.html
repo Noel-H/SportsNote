@@ -1,0 +1,27 @@
+<h1>Add Weight</h1>
+<div>
+  <p>Date</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<br>
+<div>
+  <p>Weight</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter a weight</mat-label>
+    <input matInput>
+    <span matSuffix>&nbsp;Kg</span>
+    <mat-hint>dd or dd.d</mat-hint>
+  </mat-form-field>
+</div>
+<br>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Add</button>
+</div>
+
