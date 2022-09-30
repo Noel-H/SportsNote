@@ -21,6 +21,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
 import { WeightNavBarAddDialogComponent } from './weight/weight-nav-bar/weight-nav-bar-add-dialog/weight-nav-bar-add-dialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatMenuModule} from "@angular/material/menu";
+import { WeightTableUpdateDialogComponent } from './weight/weight-table/weight-table-update-dialog/weight-table-update-dialog.component';
+import { WeightTableDeleteDialogComponent } from './weight/weight-table/weight-table-delete-dialog/weight-table-delete-dialog.component';
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     WeightChartComponent,
     WeightTableComponent,
     WeightNavBarComponent,
-    WeightNavBarAddDialogComponent
+    WeightNavBarAddDialogComponent,
+    WeightTableUpdateDialogComponent,
+    WeightTableDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatNativeDateModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,9 +15,7 @@ export class WeightNavBarComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(WeightNavBarAddDialogComponent, {
-
-    });
+    this.dialog.open(WeightNavBarAddDialogComponent, {});
   }
 
 }

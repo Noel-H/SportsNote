@@ -1,5 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {WeightRecordDTO} from "../../interface/weight-record-d-t-o";
+import {WeightTableUpdateDialogComponent} from "./weight-table-update-dialog/weight-table-update-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {WeightTableDeleteDialogComponent} from "./weight-table-delete-dialog/weight-table-delete-dialog.component";
 
 @Component({
   selector: 'app-weight-table',
@@ -15,7 +18,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,20 @@ export class WeightTableComponent implements OnInit, OnChanges {
       this.recordList = this.weightRecordList;
       this.weightType = 'Weight';
     }
+  }
+
+  openUpdateDialog(weightRecordDTO: WeightRecordDTO): void {
+    this.dialog.open(WeightTableUpdateDialogComponent, {
+      data: {
+        weightRecordDTO: weightRecordDTO
+      }});
+  }
+
+  openDeleteDialog(weightRecordDTO: WeightRecordDTO): void {
+    this.dialog.open(WeightTableDeleteDialogComponent, {
+      data: {
+        weightRecordDTO: weightRecordDTO
+      }});
   }
 
 }

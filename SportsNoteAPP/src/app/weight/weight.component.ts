@@ -16,10 +16,21 @@ export class WeightComponent implements OnInit {
   constructor(private weightRecordListService : WeightRecordListService) { }
 
   ngOnInit(): void {
+    this.getWeightRecordListAndAverageWeightRecordList()
+  }
+
+  getWeightRecordListAndAverageWeightRecordList(){
+    this.getWeightRecordList();
+    this.getAverageWeightRecordList();
+  }
+
+  getWeightRecordList(){
     this.weightRecordListService.getWeightRecordList()
       .subscribe(
         (data :WeightRecordDTO[]) => this.weightRecordList = data.reverse());
+  }
 
+  getAverageWeightRecordList(){
     this.weightRecordListService.getAverageWeightRecordList()
       .subscribe(
         (data :WeightRecordDTO[]) => this.averageWeightRecordList = data.reverse());
@@ -31,20 +42,6 @@ export class WeightComponent implements OnInit {
 
   setToggleOnAverageWeight(){
     this.isAverageWeightToggleSelected = true;
-  }
-
-  //test
-  addWeightRecord(){
-    console.log('Data added')
-    // this.weightRecordListService.addWeightRecord(new class implements WeightRecordDTO {
-    //   date: Date = new Date(2022,8,7);
-    //   weight: number = 80.5;
-    // }).subscribe()
-  }
-
-  deleteWeightRecord(){
-    console.log('Data Deleted')
-    // this.weightRecordListService.deleteWeightRecord('2022-08-07').subscribe()
   }
 
 }
