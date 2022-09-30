@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Chart} from "chart.js";
 import { registerables } from 'chart.js';
-import {WeightRecordDTO} from "../interface/weight-record-d-t-o";
+import {WeightRecordDTO} from "../../interface/weight-record-d-t-o";
 
 @Component({
   selector: 'app-weight-chart',

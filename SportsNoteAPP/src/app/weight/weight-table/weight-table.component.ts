@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {WeightRecordDTO} from "../interface/weight-record-d-t-o";
+import {WeightRecordDTO} from "../../interface/weight-record-d-t-o";
 
 @Component({
   selector: 'app-weight-table',

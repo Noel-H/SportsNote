@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {WeightRecordListService} from "../service/weight-record-list.service";
+import {WeightRecordListService} from "../../../service/weight-record-list.service";
 import {FormControl, Validators} from "@angular/forms";
 
 @Component({
