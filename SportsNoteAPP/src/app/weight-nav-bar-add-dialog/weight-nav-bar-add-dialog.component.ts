@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WeightRecordListService} from "../service/weight-record-list.service";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-weight-nav-bar-add-dialog',
@@ -8,16 +9,20 @@ import {WeightRecordListService} from "../service/weight-record-list.service";
 })
 export class WeightNavBarAddDialogComponent implements OnInit {
 
-  date : Date = new Date();
-  weight : number = 70;
+  date : FormControl = new FormControl(new Date(), Validators.required);
+  weight : FormControl = new FormControl(null, [Validators.required, Validators.pattern(/^\d*[.,]?\d?$/)]);
 
   constructor(private weightRecordListService : WeightRecordListService) {}
 
   ngOnInit(): void {
   }
 
+  isFormInvalid(): boolean{
+    return this.date.invalid || this.weight.invalid;
+  }
+
   addButtonClick(): void {
-    this.weightRecordListService.addWeightRecord({date : this.date, weight : this.weight}).subscribe();
+    this.weightRecordListService.addWeightRecord({date : this.date.value, weight : this.weight.value}).subscribe();
   }
 
 }
