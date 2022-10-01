@@ -25,7 +25,7 @@ export class WeightTableDeleteDialogComponent implements OnInit {
   }
 
   deleteButtonClick(): void {
-    this.weightRecordListService.deleteWeightRecord(this.date.value).subscribe();
+    this.weightRecordListService.deleteWeightRecord({date : this.date.value, weight : this.weight.value}).subscribe();
   }
 
 }

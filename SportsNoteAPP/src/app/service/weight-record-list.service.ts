@@ -46,15 +46,29 @@ export class WeightRecordListService {
     );
   }
 
-  deleteWeightRecord(date : string) : Observable<WeightRecordDTO|undefined>{
-    return this.http.delete<WeightRecordDTO>(`http://localhost:8080/weight_record/${date}`).pipe(
+  deleteWeightRecord(weightRecordDTO : WeightRecordDTO): Observable<WeightRecordDTO|undefined>{
+    const httpOptions = {
+      headers : new HttpHeaders({'Content-Type' : 'application/json'}),
+      body : weightRecordDTO
+    };
+    return this.http.delete<WeightRecordDTO>('http://localhost:8080/weight_record', httpOptions).pipe(
       tap((response) => console.table(response)),
       catchError((error) => {
         console.log(error);
         return of(undefined)
       })
-    )
+    );
   }
+
+  // deleteWeightRecord(date : string) : Observable<WeightRecordDTO|undefined>{
+  //   return this.http.delete<WeightRecordDTO>(`http://localhost:8080/weight_record/${date}`).pipe(
+  //     tap((response) => console.table(response)),
+  //     catchError((error) => {
+  //       console.log(error);
+  //       return of(undefined)
+  //     })
+  //   )
+  // }
 
   getAverageWeightRecordList(): Observable<WeightRecordDTO[]>{
     return this.http.get<WeightRecordDTO[]>('http://localhost:8080/average_weight_record/list').pipe(
