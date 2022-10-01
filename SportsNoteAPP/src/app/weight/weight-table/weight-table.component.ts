@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {WeightRecordDTO} from "../../interface/weight-record-d-t-o";
 import {WeightTableUpdateDialogComponent} from "./weight-table-update-dialog/weight-table-update-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -14,6 +14,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   @Input() weightRecordList: WeightRecordDTO[] = [];
   @Input() averageWeightRecordList: WeightRecordDTO[] = [];
   @Input() isAverageWeightToggleSelected: boolean = false;
+  @Output() onWeightChange = new EventEmitter<void>();
   displayedColumns: string[] = ['date', 'weight', 'options'];
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
@@ -43,14 +44,26 @@ export class WeightTableComponent implements OnInit, OnChanges {
     this.dialog.open(WeightTableUpdateDialogComponent, {
       data: {
         weightRecordDTO: weightRecordDTO
-      }});
+      }}).afterClosed()
+      .subscribe(value => {
+        console.log('valueLog', value)
+        if(value == "success"){
+          this.onWeightChange.emit();
+        }
+      });
   }
 
   openDeleteDialog(weightRecordDTO: WeightRecordDTO): void {
     this.dialog.open(WeightTableDeleteDialogComponent, {
       data: {
         weightRecordDTO: weightRecordDTO
-      }});
+      }}).afterClosed()
+      .subscribe(value => {
+        console.log('valueLog', value)
+        if(value == "success"){
+          this.onWeightChange.emit();
+        }
+      });
   }
 
 }

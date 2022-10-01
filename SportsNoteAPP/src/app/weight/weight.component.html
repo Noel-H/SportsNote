@@ -10,7 +10,8 @@
                   [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-chart>
 <app-weight-table [weightRecordList]="weightRecordList"
                   [averageWeightRecordList]="averageWeightRecordList"
-                  [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-table>
+                  [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"
+                  (onWeightChange)="getWeightRecordListAndAverageWeightRecordList()"></app-weight-table>
 
 
 
