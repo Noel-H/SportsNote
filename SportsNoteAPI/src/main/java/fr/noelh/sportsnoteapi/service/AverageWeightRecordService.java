@@ -1,6 +1,5 @@
 package fr.noelh.sportsnoteapi.service;
 
-import fr.noelh.sportsnoteapi.dto.AverageWeightRecordDTO;
 import fr.noelh.sportsnoteapi.model.WeightRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,23 +16,23 @@ public class AverageWeightRecordService {
     @Autowired
     private WeightRecordService weightRecordService;
 
-    public List<AverageWeightRecordDTO> getAverageWeightRecordList() {
-        List<AverageWeightRecordDTO> averageWeightRecordList;
+    public List<WeightRecord> getAverageWeightRecordList() {
+        List<WeightRecord> averageWeightRecordList;
         List<WeightRecord> weightRecordList = weightRecordService.getWeightRecordList();
         averageWeightRecordList = calculateAverageWeight(weightRecordList);
         return averageWeightRecordList;
     }
 
-    public List<AverageWeightRecordDTO> getWeeklyAverageWeightRecordListByDay(DayOfWeek dayOfWeek) {
+    public List<WeightRecord> getWeeklyAverageWeightRecordListByDay(DayOfWeek dayOfWeek) {
         return getAverageWeightRecordList().stream()
-                .filter(averageWeightRecordDTO -> averageWeightRecordDTO.getDate().getDayOfWeek() == dayOfWeek)
+                .filter(averageWeightRecord -> averageWeightRecord.getDate().getDayOfWeek() == dayOfWeek)
                 .collect(Collectors.toList());
     }
 
-    private List<AverageWeightRecordDTO> calculateAverageWeight(List<WeightRecord> weightRecordList) {
-        List<AverageWeightRecordDTO> calculatedAverageWeight = new ArrayList<>();
+    private List<WeightRecord> calculateAverageWeight(List<WeightRecord> weightRecordList) {
+        List<WeightRecord> calculatedAverageWeight = new ArrayList<>();
         for (WeightRecord weightRecord : weightRecordList) {
-            AverageWeightRecordDTO averageWeightRecordDTO = new AverageWeightRecordDTO();
+            WeightRecord averageWeightRecordDTO = new WeightRecord();
             List<WeightRecord> lastWeekofWeightRecord = get7LastDaysOfWeightRecord(weightRecord.getDate(), weightRecordList);
             double average = getAverage(lastWeekofWeightRecord);
             averageWeightRecordDTO.setDate(weightRecord.getDate());
@@ -60,7 +59,7 @@ public class AverageWeightRecordService {
         return weightRecordList.stream()
                 .filter(weightRecord ->
                         weightRecord.getDate().isBefore(date.plusDays(1)) &&
-                                weightRecord.getDate().isAfter(date.minusDays(7))                        )
+                                weightRecord.getDate().isAfter(date.minusDays(7)))
                 .collect(Collectors.toList());
     }
 }

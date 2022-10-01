@@ -4,7 +4,6 @@ import fr.noelh.sportsnoteapi.customexception.WeightRecordAlreadyExistException;
 import fr.noelh.sportsnoteapi.customexception.WeightRecordNotFoundException;
 import fr.noelh.sportsnoteapi.dto.WeightRecordDTO;
 import fr.noelh.sportsnoteapi.mapper.WeightRecordMapper;
-import fr.noelh.sportsnoteapi.model.WeightRecord;
 import fr.noelh.sportsnoteapi.service.WeightRecordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/weight_record")
@@ -27,16 +27,19 @@ public class WeightRecordController {
     private WeightRecordMapper weightRecordMapper;
 
     @GetMapping("/list")
-    public List<WeightRecord> getWeightRecordList(){
+    public List<WeightRecordDTO> getWeightRecordList(){
         log.info("GET /weight_record");
-            return weightRecordService.getWeightRecordList();
+        return weightRecordService.getWeightRecordList().stream()
+                .map(weightRecord -> weightRecordMapper.weightRecordToWeightRecordDTO(weightRecord))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{date}")
-    public ResponseEntity<WeightRecord> getWeightRecordByDate(@PathVariable("date") String date){
+    public ResponseEntity<WeightRecordDTO> getWeightRecordByDate(@PathVariable("date") String date){
         log.info("GET /weight_record/{}", date);
         try {
-            return ResponseEntity.ok(weightRecordService.getWeightRecordByDate(date));
+            WeightRecordDTO weightRecordDTO = weightRecordMapper.weightRecordToWeightRecordDTO(weightRecordService.getWeightRecordByDate(date));
+            return ResponseEntity.ok(weightRecordDTO);
         } catch (WeightRecordNotFoundException e){
             log.error("GET /weight_record/{} = ERROR : {}", date, e.getMessage());
             return ResponseEntity.notFound().build();
@@ -47,10 +50,13 @@ public class WeightRecordController {
     }
 
     @PostMapping("")
-    public ResponseEntity<WeightRecord> addWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
+    public ResponseEntity<WeightRecordDTO> addWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
         log.info("POST /weight_record/ of Date = {} & Weight {}",weightRecordDTO.getDate(), weightRecordDTO.getWeight());
         try {
-            return ResponseEntity.ok(weightRecordService.addWeightRecord(weightRecordMapper.WeightRecordDTOToWeightRecord(weightRecordDTO)));
+            WeightRecordDTO weightRecordDTO1 = weightRecordMapper.weightRecordToWeightRecordDTO(
+                    weightRecordService.addWeightRecord(
+                            weightRecordMapper.weightRecordDTOToWeightRecord(weightRecordDTO)));
+            return ResponseEntity.ok(weightRecordDTO1);
         } catch (WeightRecordAlreadyExistException e){
             log.error("POST /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
@@ -58,10 +64,13 @@ public class WeightRecordController {
     }
 
     @PutMapping("")
-    public ResponseEntity<WeightRecord> updateWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
+    public ResponseEntity<WeightRecordDTO> updateWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
         log.info("PUT /weight_record/ of Date = {} & Weight {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight());
         try {
-            return ResponseEntity.ok(weightRecordService.updateWeightRecord(weightRecordMapper.WeightRecordDTOToWeightRecord(weightRecordDTO)));
+            WeightRecordDTO weightRecordDTO1 = weightRecordMapper.weightRecordToWeightRecordDTO(
+                    weightRecordService.updateWeightRecord(
+                            weightRecordMapper.weightRecordDTOToWeightRecord(weightRecordDTO)));
+            return ResponseEntity.ok(weightRecordDTO1);
         } catch (WeightRecordNotFoundException e){
             log.error("PUT /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
@@ -69,10 +78,11 @@ public class WeightRecordController {
     }
 
     @DeleteMapping("/{date}")
-    public ResponseEntity<WeightRecord> deleteWeightRecord(@PathVariable("date") String date){
+    public ResponseEntity<WeightRecordDTO> deleteWeightRecord(@PathVariable("date") String date){
         log.info("DELETE /weight_record/{}", date);
         try {
-            return ResponseEntity.ok(weightRecordService.deleteWeightRecord(date));
+            WeightRecordDTO weightRecordDTO = weightRecordMapper.weightRecordToWeightRecordDTO(weightRecordService.deleteWeightRecord(date));
+            return ResponseEntity.ok(weightRecordDTO);
         } catch (WeightRecordNotFoundException e){
             log.error("DELETE /weight_record/{} = ERROR : {}", date, e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
