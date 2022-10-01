@@ -48,13 +48,16 @@ public class WeightRecordService {
         return weightRecordRepository.save(weightRecordEntity);
     }
 
-    public WeightRecord deleteWeightRecord(String date) throws WeightRecordNotFoundException {
-        LocalDate localDate = LocalDate.parse(date);
-        if (!weightRecordRepository.existsByDate(localDate)){
-            throw new WeightRecordNotFoundException("No weight record found to delete for the date : "+localDate);
+    public WeightRecord deleteWeightRecord(WeightRecord weightRecord) throws WeightRecordNotFoundException {
+        if (!weightRecordRepository.existsByDate(weightRecord.getDate())){
+            throw new WeightRecordNotFoundException("No weight record found to delete for the date : "+weightRecord.getDate());
         }
-        WeightRecord weightRecord = weightRecordRepository.getByDate(localDate);
-        weightRecordRepository.delete(weightRecord);
-        return weightRecord;
+        WeightRecord weightRecordToDelete = weightRecordRepository.getByDate(weightRecord.getDate());
+        WeightRecord weightRecordEntity = new WeightRecord();
+        weightRecordEntity.setId(weightRecordToDelete.getId());
+        weightRecordEntity.setDate(weightRecordToDelete.getDate());
+        weightRecordEntity.setWeight(weightRecordToDelete.getWeight());
+        weightRecordRepository.delete(weightRecordToDelete);
+        return weightRecordEntity;
     }
 }

@@ -77,18 +77,17 @@ public class WeightRecordController {
         }
     }
 
-    @DeleteMapping("/{date}")
-    public ResponseEntity<WeightRecordDTO> deleteWeightRecord(@PathVariable("date") String date){
-        log.info("DELETE /weight_record/{}", date);
+    @DeleteMapping("")
+    public ResponseEntity<WeightRecordDTO> deleteWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
+        log.info("DELETE /weight_record/ of Date = {}", weightRecordDTO.getDate());
         try {
-            WeightRecordDTO weightRecordDTO = weightRecordMapper.weightRecordToWeightRecordDTO(weightRecordService.deleteWeightRecord(date));
-            return ResponseEntity.ok(weightRecordDTO);
+            WeightRecordDTO weightRecordDTO1 = weightRecordMapper.weightRecordToWeightRecordDTO(
+                    weightRecordService.deleteWeightRecord(
+                            weightRecordMapper.weightRecordDTOToWeightRecord(weightRecordDTO)));
+            return ResponseEntity.ok(weightRecordDTO1);
         } catch (WeightRecordNotFoundException e){
-            log.error("DELETE /weight_record/{} = ERROR : {}", date, e.getMessage());
+            log.error("DELETE /weight_record/ of Date = {} = ERROR : {}", weightRecordDTO.getDate(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
-        } catch (DateTimeParseException e){
-            log.error("DELETE /weight_record/{} = ERROR : {}", date, e.getMessage());
-            return ResponseEntity.badRequest().build();
         }
     }
 }
