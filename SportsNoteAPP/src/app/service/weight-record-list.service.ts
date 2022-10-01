@@ -60,16 +60,6 @@ export class WeightRecordListService {
     );
   }
 
-  // deleteWeightRecord(date : string) : Observable<WeightRecordDTO|undefined>{
-  //   return this.http.delete<WeightRecordDTO>(`http://localhost:8080/weight_record/${date}`).pipe(
-  //     tap((response) => console.table(response)),
-  //     catchError((error) => {
-  //       console.log(error);
-  //       return of(undefined)
-  //     })
-  //   )
-  // }
-
   getAverageWeightRecordList(): Observable<WeightRecordDTO[]>{
     return this.http.get<WeightRecordDTO[]>('http://localhost:8080/average_weight_record/list').pipe(
       tap((averageWeightRecordList) => console.table(averageWeightRecordList)),
