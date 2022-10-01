@@ -20,17 +20,8 @@ export class WeightRecordListService {
     );
   }
 
-  addWeightRecord(weightRecordDTO : WeightRecordDTO): Observable<WeightRecordDTO|undefined>{
-    const httpOptions = {
-      headers : new HttpHeaders({'Content-Type' : 'application/json'})
-    };
-    return this.http.post<WeightRecordDTO>('http://localhost:8080/weight_record', weightRecordDTO, httpOptions).pipe(
-      tap((response) => console.table(response)),
-      catchError((error) => {
-        console.log(error);
-        return of(undefined)
-      })
-    );
+  addWeightRecord(weightRecordDTO : WeightRecordDTO): Observable<WeightRecordDTO>{
+    return this.http.post<WeightRecordDTO>('http://localhost:8080/weight_record', weightRecordDTO);
   }
 
   updateWeightRecord(weightRecordDTO : WeightRecordDTO): Observable<WeightRecordDTO|undefined>{

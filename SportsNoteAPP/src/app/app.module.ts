@@ -27,6 +27,7 @@ import { WeightTableDeleteDialogComponent } from './weight/weight-table/weight-t
 import {registerLocaleData} from "@angular/common";
 
 import fr from '@angular/common/locales/fr';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 registerLocaleData(fr);
 
@@ -41,25 +42,26 @@ registerLocaleData(fr);
     WeightTableUpdateDialogComponent,
     WeightTableDeleteDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule,
+        MatButtonToggleModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatMenuModule,
+        MatProgressSpinnerModule
+    ],
   providers: [
     {
       provide: LOCALE_ID, useValue: 'fr-FR'

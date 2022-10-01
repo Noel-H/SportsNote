@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {WeightNavBarAddDialogComponent} from "./weight-nav-bar-add-dialog/weight-nav-bar-add-dialog.component";
 
@@ -9,13 +9,22 @@ import {WeightNavBarAddDialogComponent} from "./weight-nav-bar-add-dialog/weight
 })
 export class WeightNavBarComponent implements OnInit {
 
+  @Output() onWeightChange = new EventEmitter<void>();
+
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
   openDialog(): void {
-    this.dialog.open(WeightNavBarAddDialogComponent, {});
+    this.dialog.open(WeightNavBarAddDialogComponent, {})
+      .afterClosed()
+      .subscribe(value => {
+        console.log('valueLog', value)
+        if(value == "success"){
+          this.onWeightChange.emit();
+        }
+      });
   }
 
 }
