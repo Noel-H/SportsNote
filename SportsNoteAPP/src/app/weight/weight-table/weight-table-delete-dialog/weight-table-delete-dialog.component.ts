@@ -25,11 +25,7 @@ export class WeightTableDeleteDialogComponent implements OnInit {
   }
 
   deleteButtonClick(): void {
-    // console.log(new Date(this.data.weightRecordDTO.date).getFullYear());
-    // console.log(new Date(this.data.weightRecordDTO.date));
-    // console.log(new Date(this.data.weightRecordDTO.date).getDate());
-    // console.log(new Date(this.data.weightRecordDTO.date).valueOf());
-    // this.weightRecordListService.deleteWeightRecord(new Date(this.data.weightRecordDTO.date).getFullYear()+"-"+new Date(this.data.weightRecordDTO.date).getMonth()+"-"+new Date(this.data.weightRecordDTO.date).getDate()).subscribe();
+    this.weightRecordListService.deleteWeightRecord(this.date.value).subscribe();
   }
 
 }

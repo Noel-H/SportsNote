@@ -22,10 +22,6 @@ export class WeightNavBarAddDialogComponent implements OnInit {
   }
 
   addButtonClick(): void {
-    console.log(this.date.value);
-    console.log();
-    console.log();
-    console.log();
     this.weightRecordListService.addWeightRecord({date : this.date.value, weight : this.weight.value}).subscribe();
   }
 
