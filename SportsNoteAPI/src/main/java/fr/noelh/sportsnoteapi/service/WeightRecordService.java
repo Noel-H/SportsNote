@@ -2,7 +2,6 @@ package fr.noelh.sportsnoteapi.service;
 
 import fr.noelh.sportsnoteapi.customexception.WeightRecordAlreadyExistException;
 import fr.noelh.sportsnoteapi.customexception.WeightRecordNotFoundException;
-import fr.noelh.sportsnoteapi.dto.WeightRecordDTO;
 import fr.noelh.sportsnoteapi.model.WeightRecord;
 import fr.noelh.sportsnoteapi.repository.WeightRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,23 +32,20 @@ public class WeightRecordService {
                 .orElseThrow(() -> new WeightRecordNotFoundException("No weight record found for the date : "+date));
     }
 
-    public WeightRecord addWeightRecord(WeightRecordDTO weightRecordDTO) throws WeightRecordAlreadyExistException {
-        if (weightRecordRepository.existsByDate(weightRecordDTO.getDate())){
-            throw new WeightRecordAlreadyExistException("Weight record already exist for the date : "+weightRecordDTO.getDate());
+    public WeightRecord addWeightRecord(WeightRecord weightRecord) throws WeightRecordAlreadyExistException {
+        if (weightRecordRepository.existsByDate(weightRecord.getDate())){
+            throw new WeightRecordAlreadyExistException("Weight record already exist for the date : "+weightRecord.getDate());
         }
-        WeightRecord weightRecord = new WeightRecord();
-        weightRecord.setDate(weightRecordDTO.getDate());
-        weightRecord.setWeight(weightRecordDTO.getWeight());
         return weightRecordRepository.save(weightRecord);
     }
 
-    public WeightRecord updateWeightRecord(WeightRecordDTO weightRecordDTO) throws WeightRecordNotFoundException {
-        if (!weightRecordRepository.existsByDate(weightRecordDTO.getDate())){
-            throw new WeightRecordNotFoundException("No weight record found to update for the date : "+weightRecordDTO.getDate());
+    public WeightRecord updateWeightRecord(WeightRecord weightRecord) throws WeightRecordNotFoundException {
+        if (!weightRecordRepository.existsByDate(weightRecord.getDate())){
+            throw new WeightRecordNotFoundException("No weight record found to update for the date : "+weightRecord.getDate());
         }
-        WeightRecord weightRecord = weightRecordRepository.getByDate(weightRecordDTO.getDate());
-        weightRecord.setWeight(weightRecordDTO.getWeight());
-        return weightRecordRepository.save(weightRecord);
+        WeightRecord weightRecordEntity = weightRecordRepository.getByDate(weightRecord.getDate());
+        weightRecordEntity.setWeight(weightRecord.getWeight());
+        return weightRecordRepository.save(weightRecordEntity);
     }
 
     public WeightRecord deleteWeightRecord(String date) throws WeightRecordNotFoundException {

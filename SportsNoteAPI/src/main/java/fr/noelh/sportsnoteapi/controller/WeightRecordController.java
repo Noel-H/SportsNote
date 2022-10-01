@@ -3,6 +3,7 @@ package fr.noelh.sportsnoteapi.controller;
 import fr.noelh.sportsnoteapi.customexception.WeightRecordAlreadyExistException;
 import fr.noelh.sportsnoteapi.customexception.WeightRecordNotFoundException;
 import fr.noelh.sportsnoteapi.dto.WeightRecordDTO;
+import fr.noelh.sportsnoteapi.mapper.WeightRecordMapper;
 import fr.noelh.sportsnoteapi.model.WeightRecord;
 import fr.noelh.sportsnoteapi.service.WeightRecordService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,9 @@ public class WeightRecordController {
 
     @Autowired
     private WeightRecordService weightRecordService;
+
+    @Autowired
+    private WeightRecordMapper weightRecordMapper;
 
     @GetMapping("/list")
     public List<WeightRecord> getWeightRecordList(){
@@ -46,7 +50,7 @@ public class WeightRecordController {
     public ResponseEntity<WeightRecord> addWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
         log.info("POST /weight_record/ of Date = {} & Weight {}",weightRecordDTO.getDate(), weightRecordDTO.getWeight());
         try {
-            return ResponseEntity.ok(weightRecordService.addWeightRecord(weightRecordDTO));
+            return ResponseEntity.ok(weightRecordService.addWeightRecord(weightRecordMapper.WeightRecordDTOToWeightRecord(weightRecordDTO)));
         } catch (WeightRecordAlreadyExistException e){
             log.error("POST /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
@@ -57,7 +61,7 @@ public class WeightRecordController {
     public ResponseEntity<WeightRecord> updateWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
         log.info("PUT /weight_record/ of Date = {} & Weight {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight());
         try {
-            return ResponseEntity.ok(weightRecordService.updateWeightRecord(weightRecordDTO));
+            return ResponseEntity.ok(weightRecordService.updateWeightRecord(weightRecordMapper.WeightRecordDTOToWeightRecord(weightRecordDTO)));
         } catch (WeightRecordNotFoundException e){
             log.error("PUT /weight_record/ of Date = {} & Weight {} = ERROR : {}", weightRecordDTO.getDate(), weightRecordDTO.getWeight(), e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
