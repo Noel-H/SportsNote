@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,7 +24,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatMenuModule} from "@angular/material/menu";
 import { WeightTableUpdateDialogComponent } from './weight/weight-table/weight-table-update-dialog/weight-table-update-dialog.component';
 import { WeightTableDeleteDialogComponent } from './weight/weight-table/weight-table-delete-dialog/weight-table-delete-dialog.component';
+import {registerLocaleData} from "@angular/common";
 
+import fr from '@angular/common/locales/fr';
+
+registerLocaleData(fr);
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { WeightTableDeleteDialogComponent } from './weight/weight-table/weight-t
     FormsModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID, useValue: 'fr-FR'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

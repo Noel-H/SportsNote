@@ -55,7 +55,7 @@ export class WeightChartComponent implements OnInit, OnChanges {
     this.chart.data.datasets[0] = {data : []};
     this.chart.data.datasets[1] = {data : []};
 
-    this.chart.data.labels = this.dateList.reverse();
+    this.chart.data.labels = this.dateList.reverse().map(value => value.toLocaleDateString());
     this.chart.data.datasets[0].label = 'Weight/Date';
     this.chart.data.datasets[0].data = this.weightList.reverse();
     this.chart.data.datasets[0].borderColor = '#247BC0';
@@ -72,7 +72,7 @@ export class WeightChartComponent implements OnInit, OnChanges {
   }
 
   private getDateFromWeightRecordList() {
-    this.dateList = this.weightRecordList.map(weighRecordDTO => weighRecordDTO.date);
+    this.dateList = this.weightRecordList.map(weighRecordDTO => new Date(weighRecordDTO.date));
   }
 
   private getWeightFromWeightRecordList() {
