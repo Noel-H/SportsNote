@@ -16,7 +16,7 @@
   <p>Weight</p>
   <mat-form-field appearance="fill">
     <mat-label>Enter a weight</mat-label>
-    <input matInput [formControl]="weight">
+    <input matInput [formControl]="weight" cdkFocusRegionstart>
     <span matSuffix>&nbsp;Kg</span>
     <mat-hint>d or dd or dd.d</mat-hint>
   </mat-form-field>

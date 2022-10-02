@@ -44,7 +44,8 @@ export class WeightTableComponent implements OnInit, OnChanges {
     this.dialog.open(WeightTableUpdateDialogComponent, {
       data: {
         weightRecordDTO: weightRecordDTO
-      }}).afterClosed()
+      }
+    }).afterClosed()
       .subscribe(value => {
         console.log('valueLog', value)
         if(value == "success"){
@@ -56,8 +57,10 @@ export class WeightTableComponent implements OnInit, OnChanges {
   openDeleteDialog(weightRecordDTO: WeightRecordDTO): void {
     this.dialog.open(WeightTableDeleteDialogComponent, {
       data: {
-        weightRecordDTO: weightRecordDTO
-      }}).afterClosed()
+        weightRecordDTO: weightRecordDTO,
+      },
+    autoFocus: false
+    }).afterClosed()
       .subscribe(value => {
         console.log('valueLog', value)
         if(value == "success"){
