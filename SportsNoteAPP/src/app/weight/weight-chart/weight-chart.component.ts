@@ -58,12 +58,12 @@ export class WeightChartComponent implements OnInit, OnChanges {
     this.chart.data.labels = this.dateList.reverse().map(value => value.toLocaleDateString());
     this.chart.data.datasets[0].label = 'Weight/Date';
     this.chart.data.datasets[0].data = this.weightList.reverse();
-    this.chart.data.datasets[0].borderColor = '#247BC0';
+    this.chart.data.datasets[0].borderColor = '#3F51B5';
     // this.chart.data.datasets[0].hidden = false;
 
     this.chart.data.datasets[1].label = 'Average Weight/Date';
     this.chart.data.datasets[1].data = this.averageWeightList.reverse();
-    this.chart.data.datasets[1].borderColor = '#C979E5';
+    this.chart.data.datasets[1].borderColor = '#FF4081';
     // this.chart.data.datasets[1].hidden = true;
 
     this.showCorrectData();
