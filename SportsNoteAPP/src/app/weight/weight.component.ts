@@ -37,10 +37,12 @@ export class WeightComponent implements OnInit {
   }
 
   setToggleOnWeight(){
+    console.log('setToggleToWeight', 'Switch !')
     this.isAverageWeightToggleSelected = false;
   }
 
   setToggleOnAverageWeight(){
+    console.log('setToggleToAverageWeight', 'Switch !')
     this.isAverageWeightToggleSelected = true;
   }
 

@@ -15,6 +15,8 @@ export class WeightTableComponent implements OnInit, OnChanges {
   @Input() averageWeightRecordList: WeightRecordDTO[] = [];
   @Input() isAverageWeightToggleSelected: boolean = false;
   @Output() onWeightChange = new EventEmitter<void>();
+  @Output() onSetToggleToWeight = new EventEmitter<void>();
+  @Output() onSetToggleToAverageWeight = new EventEmitter<void>();
   displayedColumns: string[] = ['date', 'weight', 'options'];
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
@@ -75,6 +77,16 @@ export class WeightTableComponent implements OnInit, OnChanges {
     } else {
       return 'weightColor';
     }
+  }
+
+  setToggleToWeight(){
+    console.log('setToggleToWeight', 'Click !')
+    this.onSetToggleToWeight.emit();
+  }
+
+  setToggleToAverageWeight(){
+    console.log('setToggleToAverageWeight', 'Click !')
+    this.onSetToggleToAverageWeight.emit();
   }
 
 }
