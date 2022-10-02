@@ -71,9 +71,9 @@ export class WeightTableComponent implements OnInit, OnChanges {
 
   colorByWeighTypeSelection(): string{
     if (this.isAverageWeightToggleSelected){
-      return 'averageWeightColor'
+      return 'averageWeightColor';
     } else {
-      return 'weightColor'
+      return 'weightColor';
     }
   }
 

@@ -5,7 +5,12 @@
   </ng-container>
 
   <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-chip-list aria-label="Fish selection">
+        <span [hidden]="isAverageWeightToggleSelected"><mat-chip color="primary" selected>Weight</mat-chip></span>
+        <span [hidden]="!isAverageWeightToggleSelected"><mat-chip color="accent" selected>Weight</mat-chip></span>
+    </mat-chip-list>
+    </th>
     <td mat-cell *matCellDef="let weightRecord" [class]="colorByWeighTypeSelection()"> {{weightRecord.weight}} </td>
   </ng-container>
 
