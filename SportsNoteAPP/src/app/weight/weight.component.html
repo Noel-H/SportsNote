@@ -1,4 +1,5 @@
-<app-weight-nav-bar (onWeightChange)="getWeightRecordListAndAverageWeightRecordList()"></app-weight-nav-bar>
+<app-weight-nav-bar (onWeightChange)="getWeightRecordListAndAverageWeightRecordList()"
+                    [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-nav-bar>
 <app-weight-chart [weightRecordList]="weightRecordList"
                   [averageWeightRecordList]="averageWeightRecordList"
                   [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-chart>

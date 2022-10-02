@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {WeightNavBarAddDialogComponent} from "./weight-nav-bar-add-dialog/weight-nav-bar-add-dialog.component";
 
@@ -9,6 +9,7 @@ import {WeightNavBarAddDialogComponent} from "./weight-nav-bar-add-dialog/weight
 })
 export class WeightNavBarComponent implements OnInit {
 
+  @Input() isAverageWeightToggleSelected : boolean = false;
   @Output() onWeightChange = new EventEmitter<void>();
 
   constructor(private dialog: MatDialog) { }

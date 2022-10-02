@@ -10,7 +10,7 @@
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" disabled>
     <mat-icon>help_outline</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialog()">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialog()" [disabled]="isAverageWeightToggleSelected">
     <mat-icon>add</mat-icon>
   </button>
 </mat-toolbar>
