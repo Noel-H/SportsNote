@@ -7,25 +7,25 @@
       </mat-chip-list>
 
       <mat-menu #dateMenu="matMenu">
-        <button mat-menu-item (click)="setDateFilterToLastWeek()">
+        <button mat-menu-item (click)="setDateFilterToLastWeek()" [class]="isPeriodFilterStatusLastWeekForClass()" [disabled]="isPeriodFilterStatusLastWeekForDisabled()">
           <span>Last Week</span>
         </button>
-        <button mat-menu-item (click)="setDateFilterToLastMonth()">
+        <button mat-menu-item (click)="setDateFilterToLastMonth()" [class]="isPeriodFilterStatusLastMonthForClass()" [disabled]="isPeriodFilterStatusLastMonthForDisabled()">
           <span>Last Month</span>
         </button>
-        <button mat-menu-item (click)="setDateFilterToLastThreeMonth()">
+        <button mat-menu-item (click)="setDateFilterToLastThreeMonth()" [class]="isPeriodFilterStatusLastThreeMonthForClass()" [disabled]="isPeriodFilterStatusLastThreeMonthForDisabled()">
           <span>Last Three Month</span>
         </button>
-        <button mat-menu-item (click)="setDateFilterToLastSixMonth()">
+        <button mat-menu-item (click)="setDateFilterToLastSixMonth()" [class]="isPeriodFilterStatusLastSixMonthForClass()" [disabled]="isPeriodFilterStatusLastSixMonthForDisabled()">
           <span>Last Six Month</span>
         </button>
-        <button mat-menu-item (click)="setDateFilterToLastYear()">
+        <button mat-menu-item (click)="setDateFilterToLastYear()" [class]="isPeriodFilterStatusLastYearForClass()" [disabled]="isPeriodFilterStatusLastYearForDisabled()">
           <span>Last Year</span>
         </button>
         <button mat-menu-item (click)="setDateFilterToChoose()" disabled>
           <span>Choose</span>
         </button>
-        <button mat-menu-item (click)="setDateFilterToAll()">
+        <button mat-menu-item (click)="setDateFilterToAll()" [class]="isPeriodFilterStatusAllForClass()" [disabled]="isPeriodFilterStatusAllForDisabled()">
           <span>All</span>
         </button>
       </mat-menu>

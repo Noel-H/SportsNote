@@ -22,6 +22,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
   isDateFilterActivated : boolean = false;
+  periodFilterStatus : string = '';
 
   constructor(private dialog: MatDialog) {
   }
@@ -94,36 +95,116 @@ export class WeightTableComponent implements OnInit, OnChanges {
   setDateFilterToLastWeek(){
     this.activateDateFilter();
     this.period.emit(604800000);
+    this.periodFilterStatus = "LastWeek";
   }
 
   setDateFilterToLastMonth(){
     this.activateDateFilter();
     this.period.emit(2628000000);
+    this.periodFilterStatus = "LastMonth";
   }
 
   setDateFilterToLastThreeMonth(){
     this.activateDateFilter();
     this.period.emit(7884000000);
+    this.periodFilterStatus = "LastThreeMonth";
   }
 
   setDateFilterToLastSixMonth(){
     this.activateDateFilter();
     this.period.emit(15770000000);
+    this.periodFilterStatus = "LastSixMonth";
   }
 
   setDateFilterToLastYear(){
     this.activateDateFilter();
     this.period.emit(31540000000);
+    this.periodFilterStatus = "LastYear";
   }
 
   setDateFilterToChoose(){
     this.activateDateFilter();
+    this.periodFilterStatus = "Choose";
   }
 
   setDateFilterToAll(){
     this.deactivateDateFilter();
     this.period.emit(0);
+    this.periodFilterStatus = "All";
   }
+
+  isPeriodFilterStatusLastWeekForDisabled(): boolean{
+    return this.periodFilterStatus == "LastWeek";
+
+  }
+
+  isPeriodFilterStatusLastWeekForClass(): string{
+    if (this.periodFilterStatus=="LastWeek"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
+  isPeriodFilterStatusLastMonthForDisabled(): boolean{
+    return this.periodFilterStatus == "LastMonth";
+
+  }
+
+  isPeriodFilterStatusLastMonthForClass(): string{
+    if (this.periodFilterStatus=="LastMonth"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
+  isPeriodFilterStatusLastThreeMonthForDisabled(): boolean{
+    return this.periodFilterStatus == "LastThreeMonth";
+
+  }
+
+  isPeriodFilterStatusLastThreeMonthForClass(): string{
+    if (this.periodFilterStatus=="LastThreeMonth"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
+  isPeriodFilterStatusLastSixMonthForDisabled(): boolean{
+    return this.periodFilterStatus == "LastSixMonth";
+
+  }
+
+  isPeriodFilterStatusLastSixMonthForClass(): string{
+    if (this.periodFilterStatus=="LastSixMonth"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
+  isPeriodFilterStatusLastYearForDisabled(): boolean{
+    return this.periodFilterStatus == "LastYear";
+
+  }
+
+  isPeriodFilterStatusLastYearForClass(): string{
+    if (this.periodFilterStatus=="LastYear"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
+  isPeriodFilterStatusAllForDisabled(): boolean{
+    return this.periodFilterStatus == "All";
+
+  }
+
+  isPeriodFilterStatusAllForClass(): string{
+    if (this.periodFilterStatus=="All"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
 
   activateDateFilter(){
     this.isDateFilterActivated = true;
