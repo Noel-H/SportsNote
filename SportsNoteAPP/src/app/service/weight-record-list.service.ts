@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {WeightRecordDTO} from "../interface/weight-record-d-t-o";
+import {WeightRecordDTO} from "../dto/weight-record-d-t-o";
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {WeightRecordDTO} from "../../interface/weight-record-d-t-o";
+import {WeightRecordDTO} from "../../dto/weight-record-d-t-o";
 import {WeightTableUpdateDialogComponent} from "./weight-table-update-dialog/weight-table-update-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {WeightTableDeleteDialogComponent} from "./weight-table-delete-dialog/weight-table-delete-dialog.component";

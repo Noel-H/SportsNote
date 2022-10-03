@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {WeightRecordListService} from "../../../service/weight-record-list.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {WeightRecordDTO} from "../../../interface/weight-record-d-t-o";
+import {WeightRecordDTO} from "../../../dto/weight-record-d-t-o";
 
 @Component({
   selector: 'app-weight-table-delete-dialog',
