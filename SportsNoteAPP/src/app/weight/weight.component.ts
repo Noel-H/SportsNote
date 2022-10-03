@@ -10,12 +10,11 @@ import {WeightRecordListService} from "../service/weight-record-list.service";
 export class WeightComponent implements OnInit {
 
   weightRecordList : WeightRecordDTO[] = [];
+  weightRecordListForFilter : WeightRecordDTO[] = [];
   averageWeightRecordList : WeightRecordDTO[] = [];
+  averageWeightRecordListForFilter : WeightRecordDTO[] = [];
   isAverageWeightToggleSelected : boolean = false;
-  oneWeek : number = 604800000;
-  oneMonth : number = 2628000000;
-  threeMonth : number = 7884000000;
-  oneYear : number = 31540000000;
+  period : number = 0;
 
   constructor(private weightRecordListService : WeightRecordListService) { }
 
@@ -31,13 +30,19 @@ export class WeightComponent implements OnInit {
   getWeightRecordList(){
     this.weightRecordListService.getWeightRecordList()
       .subscribe(
-        (data :WeightRecordDTO[]) => this.weightRecordList = this.filterDataByPeriod(data.reverse(), this.oneWeek));
+        (data :WeightRecordDTO[]) => {
+          this.weightRecordList = data.reverse();
+          this.weightRecordListForFilter = data;
+        });
   }
 
   getAverageWeightRecordList(){
     this.weightRecordListService.getAverageWeightRecordList()
       .subscribe(
-        (data :WeightRecordDTO[]) => this.averageWeightRecordList = this.filterDataByPeriod(data.reverse(), this.oneWeek));
+        (data :WeightRecordDTO[]) => {
+          this.averageWeightRecordList = data.reverse();
+          this.averageWeightRecordListForFilter = data;
+        });
   }
 
   setToggleOnWeight(){
@@ -51,6 +56,10 @@ export class WeightComponent implements OnInit {
   }
 
   private filterDataByPeriod(weightRecordDTOList: WeightRecordDTO[], period: number): WeightRecordDTO[] {
+    if (period == 0){
+      return weightRecordDTOList;
+    }
+
     let filteredData : WeightRecordDTO[] = [];
     let dateMinusPeriod : number = weightRecordDTOList[0].date-period;
 
@@ -60,5 +69,11 @@ export class WeightComponent implements OnInit {
       }
     }
     return filteredData;
+  }
+
+  setPeriod(periodInMillisecond: number){
+    this.period = periodInMillisecond;
+    this.weightRecordList = this.filterDataByPeriod(this.weightRecordListForFilter,periodInMillisecond);
+    this.averageWeightRecordList = this.filterDataByPeriod(this.averageWeightRecordListForFilter,periodInMillisecond);
   }
 }

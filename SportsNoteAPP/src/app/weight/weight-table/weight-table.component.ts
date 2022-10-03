@@ -17,9 +17,11 @@ export class WeightTableComponent implements OnInit, OnChanges {
   @Output() onWeightChange = new EventEmitter<void>();
   @Output() onSetToggleToWeight = new EventEmitter<void>();
   @Output() onSetToggleToAverageWeight = new EventEmitter<void>();
+  @Output() period : EventEmitter<number> = new EventEmitter<number>();
   displayedColumns: string[] = ['date', 'weight', 'options'];
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
+  isDateFilterActivated : boolean = false;
 
   constructor(private dialog: MatDialog) {
   }
@@ -89,4 +91,45 @@ export class WeightTableComponent implements OnInit, OnChanges {
     this.onSetToggleToAverageWeight.emit();
   }
 
+  setDateFilterToLastWeek(){
+    this.activateDateFilter();
+    this.period.emit(604800000);
+  }
+
+  setDateFilterToLastMonth(){
+    this.activateDateFilter();
+    this.period.emit(2628000000);
+  }
+
+  setDateFilterToLastThreeMonth(){
+    this.activateDateFilter();
+    this.period.emit(7884000000);
+  }
+
+  setDateFilterToLastSixMonth(){
+    this.activateDateFilter();
+    this.period.emit(15770000000);
+  }
+
+  setDateFilterToLastYear(){
+    this.activateDateFilter();
+    this.period.emit(31540000000);
+  }
+
+  setDateFilterToChoose(){
+    this.activateDateFilter();
+  }
+
+  setDateFilterToAll(){
+    this.deactivateDateFilter();
+    this.period.emit(0);
+  }
+
+  activateDateFilter(){
+    this.isDateFilterActivated = true;
+  }
+
+  deactivateDateFilter(){
+    this.isDateFilterActivated = false;
+  }
 }
