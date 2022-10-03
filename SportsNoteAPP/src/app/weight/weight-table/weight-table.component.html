@@ -22,9 +22,9 @@
         <button mat-menu-item (click)="setDateFilterToLastYear()" [class]="isPeriodFilterStatusLastYearForClass()" [disabled]="isPeriodFilterStatusLastYearForDisabled()">
           <span>Last Year</span>
         </button>
-        <button mat-menu-item (click)="setDateFilterToChoose()" disabled>
-          <span>Choose</span>
-        </button>
+<!--        <button mat-menu-item (click)="setDateFilterToChoose()" disabled>-->
+<!--          <span>Choose</span>-->
+<!--        </button>-->
         <button mat-menu-item (click)="setDateFilterToAll()" [class]="isPeriodFilterStatusAllForClass()" [disabled]="isPeriodFilterStatusAllForDisabled()">
           <span>All</span>
         </button>
@@ -64,4 +64,5 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 </table>

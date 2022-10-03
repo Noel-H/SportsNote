@@ -22,7 +22,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
   isDateFilterActivated : boolean = false;
-  periodFilterStatus : string = '';
+  periodFilterStatus : string = 'All';
 
   constructor(private dialog: MatDialog) {
   }
@@ -200,7 +200,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
 
   isPeriodFilterStatusAllForClass(): string{
     if (this.periodFilterStatus=="All"){
-      return "primaryColorMenu";
+      return "greyColorMenu";
     }
     return "";
   }
