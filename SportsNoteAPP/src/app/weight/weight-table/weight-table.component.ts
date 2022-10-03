@@ -98,6 +98,12 @@ export class WeightTableComponent implements OnInit, OnChanges {
     this.periodFilterStatus = "LastWeek";
   }
 
+  setDateFilterToLastTwoWeek(){
+    this.activateDateFilter();
+    this.period.emit(604800000*2);
+    this.periodFilterStatus = "LastTwoWeek";
+  }
+
   setDateFilterToLastMonth(){
     this.activateDateFilter();
     this.period.emit(2628000000);
@@ -140,6 +146,18 @@ export class WeightTableComponent implements OnInit, OnChanges {
 
   isPeriodFilterStatusLastWeekForClass(): string{
     if (this.periodFilterStatus=="LastWeek"){
+      return "primaryColorMenu";
+    }
+    return "";
+  }
+
+  isPeriodFilterStatusLastTwoWeekForDisabled(): boolean{
+    return this.periodFilterStatus == "LastTwoWeek";
+
+  }
+
+  isPeriodFilterStatusLastTwoWeekForClass(): string{
+    if (this.periodFilterStatus=="LastTwoWeek"){
       return "primaryColorMenu";
     }
     return "";
