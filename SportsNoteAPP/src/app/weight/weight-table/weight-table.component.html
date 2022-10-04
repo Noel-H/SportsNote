@@ -39,8 +39,8 @@
   <ng-container matColumnDef="weight">
     <th mat-header-cell *matHeaderCellDef>
       <mat-chip-list aria-label="Fish selection">
-        <span [hidden]="!isAverageWeightToggleSelected" (click)="setToggleToWeight()"><mat-chip color="accent" selected>Weight</mat-chip></span>
-        <span [hidden]="isAverageWeightToggleSelected" (click)="setToggleToAverageWeight()"><mat-chip color="primary" selected>Weight</mat-chip></span>
+        <span [hidden]="!isAverageWeightToggleOn" (click)="setToggleToWeight()"><mat-chip color="accent" selected>Weight</mat-chip></span>
+        <span [hidden]="isAverageWeightToggleOn" (click)="setToggleToAverageWeight()"><mat-chip color="primary" selected>Weight</mat-chip></span>
     </mat-chip-list>
     </th>
     <td mat-cell *matCellDef="let weightRecord" [class]="colorByWeighTypeSelection()"> {{weightRecord.weight}} </td>
@@ -49,7 +49,7 @@
   <ng-container matColumnDef="options">
     <th mat-header-cell *matHeaderCellDef> Options </th>
     <td mat-cell *matCellDef="let weightRecord">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" [disabled]="isAverageWeightToggleSelected">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" [disabled]="isAverageWeightToggleOn">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">

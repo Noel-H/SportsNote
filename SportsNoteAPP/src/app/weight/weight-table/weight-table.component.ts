@@ -3,6 +3,7 @@ import {WeightRecordDTO} from "../../dto/weight-record-d-t-o";
 import {WeightTableUpdateDialogComponent} from "./weight-table-update-dialog/weight-table-update-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {WeightTableDeleteDialogComponent} from "./weight-table-delete-dialog/weight-table-delete-dialog.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-weight-table',
@@ -13,11 +14,12 @@ export class WeightTableComponent implements OnInit, OnChanges {
 
   @Input() weightRecordList: WeightRecordDTO[] = [];
   @Input() averageWeightRecordList: WeightRecordDTO[] = [];
-  @Input() isAverageWeightToggleSelected: boolean = false;
+  @Input() isAverageWeightToggleSelected : Observable<boolean> = new Observable<boolean>();
   @Output() onWeightChange = new EventEmitter<void>();
   @Output() onSetToggleToWeight = new EventEmitter<void>();
   @Output() onSetToggleToAverageWeight = new EventEmitter<void>();
   @Output() period : EventEmitter<number> = new EventEmitter<number>();
+  isAverageWeightToggleOn : boolean = false;
   displayedColumns: string[] = ['date', 'weight', 'options'];
   recordList : WeightRecordDTO[] = [];
   weightType : String = 'test';
@@ -28,7 +30,9 @@ export class WeightTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-
+    this.isAverageWeightToggleSelected.subscribe(value => {
+      this.isAverageWeightToggleOn = value
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,7 +40,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   }
 
   getList(){
-    if (this.isAverageWeightToggleSelected){
+    if (this.isAverageWeightToggleOn){
       this.recordList = this.averageWeightRecordList;
       this.weightType = 'Average weight';
     } else {
@@ -75,7 +79,7 @@ export class WeightTableComponent implements OnInit, OnChanges {
   }
 
   colorByWeighTypeSelection(): string{
-    if (this.isAverageWeightToggleSelected){
+    if (this.isAverageWeightToggleOn){
       return 'averageWeightColor';
     } else {
       return 'weightColor';

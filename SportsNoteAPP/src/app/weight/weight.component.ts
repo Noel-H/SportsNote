@@ -13,7 +13,7 @@ export class WeightComponent implements OnInit {
   weightRecordListForFilter : WeightRecordDTO[] = [];
   averageWeightRecordList : WeightRecordDTO[] = [];
   averageWeightRecordListForFilter : WeightRecordDTO[] = [];
-  isAverageWeightToggleSelected : boolean = false;
+  isAverageWeightToggleSelected : EventEmitter<boolean> = new EventEmitter<boolean>();
   period : number = 0;
   onWeightChange : EventEmitter<WeightRecordDTO[]> = new EventEmitter<WeightRecordDTO[]>();
   onAverageWeightChange : EventEmitter<WeightRecordDTO[]> = new EventEmitter<WeightRecordDTO[]>();
@@ -51,12 +51,12 @@ export class WeightComponent implements OnInit {
 
   setToggleOnWeight(){
     console.log('setToggleToWeight', 'Switch !')
-    this.isAverageWeightToggleSelected = false;
+    this.isAverageWeightToggleSelected.emit(false);
   }
 
   setToggleOnAverageWeight(){
     console.log('setToggleToAverageWeight', 'Switch !')
-    this.isAverageWeightToggleSelected = true;
+    this.isAverageWeightToggleSelected.emit(true);
   }
 
   private filterDataByPeriod(weightRecordDTOList: WeightRecordDTO[], period: number): WeightRecordDTO[] {

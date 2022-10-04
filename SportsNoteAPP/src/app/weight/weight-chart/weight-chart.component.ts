@@ -14,9 +14,10 @@ export class WeightChartComponent implements OnInit {
 
   @Input() weightRecordList : WeightRecordDTO[] = [];
   @Input() averageWeightRecordList : WeightRecordDTO[] = [];
-  @Input() isAverageWeightToggleSelected : boolean = false;
+  @Input() isAverageWeightToggleSelected : Observable<boolean> = new Observable<boolean>();
   @Input() weightChange: Observable<WeightRecordDTO[]> = new Observable<WeightRecordDTO[]>();
   @Input() averageWeightChange: Observable<WeightRecordDTO[]> = new Observable<WeightRecordDTO[]>();
+  isAverageWeightToggleOn : boolean = false;
   dateList : Date[] = [];
   weightList : number[] = [];
   averageWeightList : number[] = [];
@@ -28,6 +29,9 @@ export class WeightChartComponent implements OnInit {
   ngOnInit(): void {
     Chart.register(...registerables);
     this.createdChart();
+    this.isAverageWeightToggleSelected.subscribe(value => {
+      this.isAverageWeightToggleOn = value
+    });
     this.weightChange.subscribe(value => {
       this.weightRecordList = value
       this.loadData();
@@ -97,7 +101,7 @@ export class WeightChartComponent implements OnInit {
   }
 
   private showCorrectData(){
-    if (this.isAverageWeightToggleSelected){
+    if (this.isAverageWeightToggleOn){
       this.chart.data.datasets[0].hidden = true;
       this.chart.data.datasets[1].hidden = false;
     } else {
