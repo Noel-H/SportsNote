@@ -77,7 +77,7 @@ export class WeightComponent implements OnInit {
 
   setPeriod(periodInMillisecond: number){
     this.period = periodInMillisecond;
-    this.weightRecordList = this.filterDataByPeriod(this.weightRecordListForFilter,periodInMillisecond);
-    this.averageWeightRecordList = this.filterDataByPeriod(this.averageWeightRecordListForFilter,periodInMillisecond);
+    this.onWeightChange.emit(this.filterDataByPeriod(this.weightRecordListForFilter,periodInMillisecond));
+    this.onAverageWeightChange.emit(this.filterDataByPeriod(this.averageWeightRecordListForFilter,periodInMillisecond));
   }
 }
