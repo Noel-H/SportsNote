@@ -21,6 +21,7 @@ export class WeightTableComponent implements OnInit {
   @Output() onSetToggleToWeight = new EventEmitter<void>();
   @Output() onSetToggleToAverageWeight = new EventEmitter<void>();
   @Output() period : EventEmitter<number> = new EventEmitter<number>();
+  selectedPeriod : number = 0;
   isAverageWeightToggleOn : boolean = false;
   displayedColumns: string[] = ['date', 'weight', 'options'];
   recordList : WeightRecordDTO[] = [];
@@ -96,45 +97,53 @@ export class WeightTableComponent implements OnInit {
   setToggleToWeight(){
     console.log('setToggleToWeight', 'Click !')
     this.onSetToggleToWeight.emit();
+    this.period.emit(this.selectedPeriod);
   }
 
   setToggleToAverageWeight(){
     console.log('setToggleToAverageWeight', 'Click !')
     this.onSetToggleToAverageWeight.emit();
+    this.period.emit(this.selectedPeriod);
   }
 
   setDateFilterToLastWeek(){
     this.activateDateFilter();
+    this.selectedPeriod = 604800000;
     this.period.emit(604800000);
     this.periodFilterStatus = "LastWeek";
   }
 
   setDateFilterToLastTwoWeek(){
     this.activateDateFilter();
+    this.selectedPeriod = 604800000*2;
     this.period.emit(604800000*2);
     this.periodFilterStatus = "LastTwoWeek";
   }
 
   setDateFilterToLastMonth(){
     this.activateDateFilter();
+    this.selectedPeriod = 2628000000;
     this.period.emit(2628000000);
     this.periodFilterStatus = "LastMonth";
   }
 
   setDateFilterToLastThreeMonth(){
     this.activateDateFilter();
+    this.selectedPeriod = 7884000000;
     this.period.emit(7884000000);
     this.periodFilterStatus = "LastThreeMonth";
   }
 
   setDateFilterToLastSixMonth(){
     this.activateDateFilter();
+    this.selectedPeriod = 15770000000;
     this.period.emit(15770000000);
     this.periodFilterStatus = "LastSixMonth";
   }
 
   setDateFilterToLastYear(){
     this.activateDateFilter();
+    this.selectedPeriod = 31540000000;
     this.period.emit(31540000000);
     this.periodFilterStatus = "LastYear";
   }
@@ -146,6 +155,7 @@ export class WeightTableComponent implements OnInit {
 
   setDateFilterToAll(){
     this.deactivateDateFilter();
+    this.selectedPeriod = 0;
     this.period.emit(0);
     this.periodFilterStatus = "All";
   }
