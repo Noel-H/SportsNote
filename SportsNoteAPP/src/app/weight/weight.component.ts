@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {WeightRecordDTO} from "../dto/weight-record-d-t-o";
 import {WeightRecordListService} from "../service/weight-record-list.service";
 
@@ -15,6 +15,8 @@ export class WeightComponent implements OnInit {
   averageWeightRecordListForFilter : WeightRecordDTO[] = [];
   isAverageWeightToggleSelected : boolean = false;
   period : number = 0;
+  onWeightChange : EventEmitter<WeightRecordDTO[]> = new EventEmitter<WeightRecordDTO[]>();
+  onAverageWeightChange : EventEmitter<WeightRecordDTO[]> = new EventEmitter<WeightRecordDTO[]>();
 
   constructor(private weightRecordListService : WeightRecordListService) { }
 
@@ -33,6 +35,7 @@ export class WeightComponent implements OnInit {
         (data :WeightRecordDTO[]) => {
           this.weightRecordList = data.reverse();
           this.weightRecordListForFilter = data;
+          this.onWeightChange.emit(data);
         });
   }
 
@@ -42,6 +45,7 @@ export class WeightComponent implements OnInit {
         (data :WeightRecordDTO[]) => {
           this.averageWeightRecordList = data.reverse();
           this.averageWeightRecordListForFilter = data;
+          this.onAverageWeightChange.emit(data);
         });
   }
 

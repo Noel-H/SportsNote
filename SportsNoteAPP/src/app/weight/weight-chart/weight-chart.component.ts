@@ -1,7 +1,8 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Chart} from "chart.js";
 import { registerables } from 'chart.js';
 import {WeightRecordDTO} from "../../dto/weight-record-d-t-o";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-weight-chart',
@@ -9,11 +10,13 @@ import {WeightRecordDTO} from "../../dto/weight-record-d-t-o";
   styleUrls: ['./weight-chart.component.scss']
 })
 
-export class WeightChartComponent implements OnInit, OnChanges {
+export class WeightChartComponent implements OnInit {
 
   @Input() weightRecordList : WeightRecordDTO[] = [];
   @Input() averageWeightRecordList : WeightRecordDTO[] = [];
   @Input() isAverageWeightToggleSelected : boolean = false;
+  @Input() weightChange: Observable<WeightRecordDTO[]> = new Observable<WeightRecordDTO[]>();
+  @Input() averageWeightChange: Observable<WeightRecordDTO[]> = new Observable<WeightRecordDTO[]>();
   dateList : Date[] = [];
   weightList : number[] = [];
   averageWeightList : number[] = [];
@@ -25,9 +28,17 @@ export class WeightChartComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     Chart.register(...registerables);
     this.createdChart();
+    this.weightChange.subscribe(value => {
+      this.weightRecordList = value
+      this.loadData();
+    });
+    this.averageWeightChange.subscribe(value => {
+      this.averageWeightRecordList = value
+      this.loadData();
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  loadData(): void {
     this.getDateFromWeightRecordList();
     this.getWeightFromWeightRecordList();
     this.getAverageWeightFromAverageWeightRecordList()

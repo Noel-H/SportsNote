@@ -2,7 +2,9 @@
                     [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-nav-bar>
 <app-weight-chart [weightRecordList]="weightRecordList"
                   [averageWeightRecordList]="averageWeightRecordList"
-                  [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"></app-weight-chart>
+                  [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"
+                  [weightChange]="onWeightChange"
+                  [averageWeightChange]="onAverageWeightChange"></app-weight-chart>
 <app-weight-table [weightRecordList]="weightRecordList"
                   [averageWeightRecordList]="averageWeightRecordList"
                   [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"
