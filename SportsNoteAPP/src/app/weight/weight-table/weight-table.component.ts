@@ -35,15 +35,17 @@ export class WeightTableComponent implements OnInit {
   ngOnInit(): void {
     this.isAverageWeightToggleSelected.subscribe(value => {
       this.isAverageWeightToggleOn = value;
-      this.getList()
+      this.getList();
     });
     this.weightChange.subscribe(value => {
       this.weightRecordList = value;
       this.recordList = value;
+      this.getList();
     });
     this.averageWeightChange.subscribe(value => {
       this.averageWeightRecordList = value
       this.recordList = value;
+      this.getList();
     });
   }
 
