@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WeightRecordDTO} from "../../dto/weight-record-d-t-o";
 import {WeightTableUpdateDialogComponent} from "./weight-table-update-dialog/weight-table-update-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -10,11 +10,13 @@ import {Observable} from "rxjs";
   templateUrl: './weight-table.component.html',
   styleUrls: ['./weight-table.component.scss']
 })
-export class WeightTableComponent implements OnInit, OnChanges {
+export class WeightTableComponent implements OnInit {
 
   @Input() weightRecordList: WeightRecordDTO[] = [];
   @Input() averageWeightRecordList: WeightRecordDTO[] = [];
   @Input() isAverageWeightToggleSelected : Observable<boolean> = new Observable<boolean>();
+  @Input() weightChange: Observable<WeightRecordDTO[]> = new Observable<WeightRecordDTO[]>();
+  @Input() averageWeightChange: Observable<WeightRecordDTO[]> = new Observable<WeightRecordDTO[]>();
   @Output() onWeightChange = new EventEmitter<void>();
   @Output() onSetToggleToWeight = new EventEmitter<void>();
   @Output() onSetToggleToAverageWeight = new EventEmitter<void>();
@@ -31,12 +33,17 @@ export class WeightTableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.isAverageWeightToggleSelected.subscribe(value => {
-      this.isAverageWeightToggleOn = value
+      this.isAverageWeightToggleOn = value;
+      this.getList()
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getList();
+    this.weightChange.subscribe(value => {
+      this.weightRecordList = value;
+      this.recordList = value;
+    });
+    this.averageWeightChange.subscribe(value => {
+      this.averageWeightRecordList = value
+      this.recordList = value;
+    });
   }
 
   getList(){

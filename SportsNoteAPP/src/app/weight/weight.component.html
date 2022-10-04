@@ -8,6 +8,8 @@
 <app-weight-table [weightRecordList]="weightRecordList"
                   [averageWeightRecordList]="averageWeightRecordList"
                   [isAverageWeightToggleSelected]="isAverageWeightToggleSelected"
+                  [weightChange]="onWeightChange"
+                  [averageWeightChange]="onAverageWeightChange"
                   (onWeightChange)="getWeightRecordListAndAverageWeightRecordList()"
                   (onSetToggleToWeight)="setToggleOnWeight()"
                   (onSetToggleToAverageWeight)="setToggleOnAverageWeight()"
