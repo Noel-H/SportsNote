@@ -51,6 +51,8 @@ public class WeightRecordController {
 
     @PostMapping("")
     public ResponseEntity<WeightRecordDTO> addWeightRecord(@RequestBody WeightRecordDTO weightRecordDTO){
+
+
         log.info("POST /weight_record of Date = {} & Weight {}",weightRecordDTO.getDate(), weightRecordDTO.getWeight());
         try {
             WeightRecordDTO weightRecordDTO1 = weightRecordMapper.weightRecordToWeightRecordDTO(

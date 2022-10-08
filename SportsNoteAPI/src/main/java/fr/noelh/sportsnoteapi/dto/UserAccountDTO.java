@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Data
@@ -15,11 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 public class UserAccountDTO {
 
+    private Long id;
+
     private String email;
 
     private String password;
 
     private List<WeightRecord> weightRecordList = new ArrayList<>();
 
-    private Collection<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>();
 }
