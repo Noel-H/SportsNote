@@ -1,8 +1,9 @@
 package fr.noelh.sportsnoteapi.controller;
 
-import fr.noelh.sportsnoteapi.customexception.UserAccountAlreadyExistException;
-import fr.noelh.sportsnoteapi.customexception.UserAccountNotFoundException;
+import fr.noelh.sportsnoteapi.customexception.*;
+import fr.noelh.sportsnoteapi.dto.RoleDTO;
 import fr.noelh.sportsnoteapi.dto.UserAccountDTO;
+import fr.noelh.sportsnoteapi.mapper.RoleMapper;
 import fr.noelh.sportsnoteapi.mapper.UserAccountMapper;
 import fr.noelh.sportsnoteapi.model.UserAccount;
 import fr.noelh.sportsnoteapi.service.UserAccountService;
@@ -21,9 +22,12 @@ public class UserAccountController {
 
     private final UserAccountMapper userAccountMapper;
 
-    public UserAccountController(UserAccountService userAccountService, UserAccountMapper userAccountMapper) {
+    private final RoleMapper roleMapper;
+
+    public UserAccountController(UserAccountService userAccountService, UserAccountMapper userAccountMapper, RoleMapper roleMapper) {
         this.userAccountService = userAccountService;
         this.userAccountMapper = userAccountMapper;
+        this.roleMapper = roleMapper;
     }
 
     @GetMapping("")
@@ -78,7 +82,50 @@ public class UserAccountController {
             return ResponseEntity.ok(
                     userAccountService.deleteUserAccount(id));
         } catch (UserAccountNotFoundException e){
-            log.info("DELETE /userAccounts/{} = ERROR : {}", id, e.getMessage());
+            log.error("DELETE /userAccounts/{} = ERROR : {}", id, e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{id}/roles")
+    public ResponseEntity<UserAccount> addRoleToUserAccount(@PathVariable Long id,
+                                                            @RequestBody RoleDTO roleDTO){
+        try{
+            log.info("POST /{}/roles", id);
+            return ResponseEntity.ok(
+                    userAccountService.addRoleToUserAccount(
+                            id,
+                            roleMapper.roleDTOTORole(roleDTO)));
+        } catch (UserAccountNotFoundException e){
+            log.error("POST /{}/roles = ERROR : {}", id, e.getMessage());
+            return ResponseEntity.notFound().build();
+        } catch (RoleAlreadyExistForThisUserAccountException e){
+            log.error("POST /{}/roles = ERROR : {}", id, e.getMessage());
+            return ResponseEntity.unprocessableEntity().build();
+        } catch (RoleNotFoundException e) {
+            log.error("POST /{}/roles = ERROR : {}", id, e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}/roles")
+    public ResponseEntity<UserAccount> deleteRoleToUserAccount(@PathVariable Long id,
+                                                               @RequestBody RoleDTO roleDTO){
+        try{
+            log.info("DELETE /{}/roles", id);
+            return ResponseEntity.ok(
+                    userAccountService.deleteRoleToUserAccount(
+                            id,
+                            roleMapper.roleDTOTORole(roleDTO)
+                    ));
+        } catch (UserAccountNotFoundException e){
+            log.error("DELETE /{}/roles = ERROR : {}", id, e.getMessage());
+            return ResponseEntity.notFound().build();
+        } catch (RoleNotFoundForThisUserAccountException e){
+            log.error("DELETE /{}/roles = ERROR : {}", id, e.getMessage());
+            return ResponseEntity.unprocessableEntity().build();
+        } catch (RoleNotFoundException e) {
+            log.error("DELETE /{}/roles = ERROR : {}", id, e.getMessage());
             return ResponseEntity.notFound().build();
         }
     }

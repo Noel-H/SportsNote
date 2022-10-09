@@ -28,6 +28,6 @@ public class UserAccount {
     @OneToMany
     private List<WeightRecord> weightRecordList = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Role> roles = new ArrayList<>();
 }
