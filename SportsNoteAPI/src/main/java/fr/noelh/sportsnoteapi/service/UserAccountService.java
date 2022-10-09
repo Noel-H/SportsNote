@@ -1,7 +1,10 @@
 package fr.noelh.sportsnoteapi.service;
 
+import fr.noelh.sportsnoteapi.customexception.RoleAlreadyExistForThisUserAccountException;
+import fr.noelh.sportsnoteapi.customexception.RoleNotFoundForThisUserAccountException;
 import fr.noelh.sportsnoteapi.customexception.UserAccountAlreadyExistException;
 import fr.noelh.sportsnoteapi.customexception.UserAccountNotFoundException;
+import fr.noelh.sportsnoteapi.model.Role;
 import fr.noelh.sportsnoteapi.model.UserAccount;
 import fr.noelh.sportsnoteapi.repository.UserAccountRepository;
 import org.springframework.stereotype.Service;
@@ -36,7 +39,7 @@ public class UserAccountService {
 
     public UserAccount addUserAccount(UserAccount userAccount) throws UserAccountAlreadyExistException {
         if (userAccountRepository.findUserAccountByEmail(userAccount.getEmail()).isPresent()){
-            throw new UserAccountAlreadyExistException("UserAccount email : '"+userAccount.getEmail()+"' Already exist");
+            throw new UserAccountAlreadyExistException("UserAccount email : '"+userAccount.getEmail()+"' already exist");
         }
         UserAccount userAccountToAdd = new UserAccount();
         userAccountToAdd.setEmail(userAccount.getEmail());
@@ -80,5 +83,27 @@ public class UserAccountService {
                 new ArrayList<>(userAccountToDelete.getRoles()));
         userAccountRepository.delete(userAccountToDelete);
         return userAccountToReturn;
+    }
+
+    public UserAccount addRoleToUserAccount(Long id, Role role) throws UserAccountNotFoundException, RoleAlreadyExistForThisUserAccountException {
+        UserAccount userAccountToAddRole = userAccountRepository.findById(id)
+                .orElseThrow(() -> new UserAccountNotFoundException("UserAccount id : '"+id+"' not found"));
+
+        if (userAccountToAddRole.getRoles().contains(role)){
+            throw new RoleAlreadyExistForThisUserAccountException("UserAccount email : '"+userAccountToAddRole.getEmail()+"' already have the role : '"+role+"'");
+        }
+        userAccountToAddRole.getRoles().add(role);
+        return userAccountRepository.save(userAccountToAddRole);
+    }
+
+    public UserAccount deleteRoleToUserAccount(Long id, Role role) throws UserAccountNotFoundException, RoleNotFoundForThisUserAccountException {
+        UserAccount userAccountToDeleteRole = userAccountRepository.findById(id)
+                .orElseThrow(() -> new UserAccountNotFoundException("UserAccount id : '"+id+"' not found"));
+
+        if (!userAccountToDeleteRole.getRoles().contains(role)){
+            throw new RoleNotFoundForThisUserAccountException("UserAccount email : '"+userAccountToDeleteRole.getEmail()+"' don't have the role : '"+role+"'");
+        }
+        userAccountToDeleteRole.getRoles().remove(role);
+        return userAccountRepository.save(userAccountToDeleteRole);
     }
 }

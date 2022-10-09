@@ -9,7 +9,7 @@ public class UserAccountMapper {
 
     public UserAccount userAccountDTOToUserAccount(UserAccountDTO userAccountDTO){
         UserAccount userAccount = new UserAccount();
-        userAccount.setId(userAccountDTO.getId());
+//        userAccount.setId(userAccountDTO.getId());
         userAccount.setEmail(userAccountDTO.getEmail());
         userAccount.setPassword(userAccountDTO.getPassword());
         userAccount.setWeightRecordList(userAccountDTO.getWeightRecordList());
@@ -17,13 +17,13 @@ public class UserAccountMapper {
         return userAccount;
     }
 
-    public UserAccountDTO userAccountToUserAccountDTO(UserAccount userAccount){
-        UserAccountDTO userAccountDTO = new UserAccountDTO();
-        userAccountDTO.setId(userAccount.getId());
-        userAccountDTO.setEmail(userAccount.getEmail());
-        userAccountDTO.setPassword(userAccount.getPassword());
-        userAccountDTO.setWeightRecordList(userAccount.getWeightRecordList());
-        userAccountDTO.setRoles(userAccount.getRoles());
-        return userAccountDTO;
-    }
+//    public UserAccountDTO userAccountToUserAccountDTO(UserAccount userAccount){
+//        UserAccountDTO userAccountDTO = new UserAccountDTO();
+//        userAccountDTO.setId(userAccount.getId());
+//        userAccountDTO.setEmail(userAccount.getEmail());
+//        userAccountDTO.setPassword(userAccount.getPassword());
+//        userAccountDTO.setWeightRecordList(userAccount.getWeightRecordList());
+//        userAccountDTO.setRoles(userAccount.getRoles());
+//        return userAccountDTO;
+//    }
 }

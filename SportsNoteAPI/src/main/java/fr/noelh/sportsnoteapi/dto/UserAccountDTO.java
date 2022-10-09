@@ -14,8 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class UserAccountDTO {
 
-    private Long id;
-
     private String email;
 
     private String password;
