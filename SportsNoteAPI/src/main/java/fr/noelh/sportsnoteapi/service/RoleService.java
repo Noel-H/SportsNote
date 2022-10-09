@@ -5,10 +5,12 @@ import fr.noelh.sportsnoteapi.customexception.RoleNotFoundException;
 import fr.noelh.sportsnoteapi.enumeration.RoleEnum;
 import fr.noelh.sportsnoteapi.model.Role;
 import fr.noelh.sportsnoteapi.repository.RoleRepository;
+import fr.noelh.sportsnoteapi.repository.UserAccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -16,8 +18,11 @@ public class RoleService {
 
     private final RoleRepository roleRepository;
 
-    public RoleService(RoleRepository roleRepository) {
+    private final UserAccountRepository userAccountRepository;
+
+    public RoleService(RoleRepository roleRepository, UserAccountRepository userAccountRepository) {
         this.roleRepository = roleRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
     public List<Role> getRoleList(){
@@ -42,6 +47,11 @@ public class RoleService {
         Role roleToReturn = new Role();
         roleToReturn.setId(roleToDelete.getId());
         roleToReturn.setRoleEnum(roleToDelete.getRoleEnum());
+
+        userAccountRepository.findAll().stream()
+                .map(userAccount -> userAccount.getRoles().remove(roleToDelete))
+                .collect(Collectors.toList());
+
         roleRepository.delete(roleToDelete);
         return roleToReturn;
     }
