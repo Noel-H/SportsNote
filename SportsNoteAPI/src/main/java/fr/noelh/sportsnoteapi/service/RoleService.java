@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,9 +47,8 @@ public class RoleService {
         roleToReturn.setId(roleToDelete.getId());
         roleToReturn.setRoleEnum(roleToDelete.getRoleEnum());
 
-        userAccountRepository.findAll().stream()
-                .map(userAccount -> userAccount.getRoles().remove(roleToDelete))
-                .collect(Collectors.toList());
+        userAccountRepository.findAll()
+                .forEach(userAccount -> userAccount.getRoles().remove(roleToDelete));
 
         roleRepository.delete(roleToDelete);
         return roleToReturn;
